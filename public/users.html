@@ -1,0 +1,228 @@
+
+<!-- views/login.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>egupta Project-1</title>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    
+    <style>
+     	.btn-default{ margin-left:10px;}
+    </style>     
+    
+    <script>
+    var login = false;
+    var sessionId = '';
+    window.onload = function () {
+    	var callBack = 'callbackSession';
+    	$.ajax({
+			url: '/getSession',
+			type: 'GET', 
+			dataType: 'json',
+			success: function(data){
+				var responseData = JSON.stringify(data);
+				responseData = eval('(' + responseData + ')');
+				if(callBack || callBack!='')
+				{
+					if(typeof window[callBack] === 'undefined') {
+						alert('Callback function not found.');
+					}else {
+						window[callBack].call(this,responseData);
+					}
+				}		
+			}
+		});
+    	
+    }
+    
+    function callbackSession (response) {
+    	var username = response.username;
+    	if(username !== '') {
+    	
+    		document.getElementById('username').innerHTML = username;
+    		document.getElementById('loginButton').innerHTML = 'Logout';
+    		
+    		if (response.role === 'admin') {
+    			document.getElementById('users').innerHTML = 'View Users';
+    			document.getElementById('manageProd').innerHTML = 'Manage Products';
+    		}
+    		sessionId = response.sessionId;
+    		login = true;
+    	} else {
+    		login = false;
+    	}
+    }
+    
+    function onLogin () {
+    	/*$.ajax({
+    		url : '/login',
+    		data : {
+    			format : 'json'
+    		},
+    		error: function() {
+    			
+    		},
+    		dataType : 'jsonp',
+    		success : function () {
+    		},
+    		type: 'GET'
+    	
+    	});*/
+    	if (login) {
+    		window.open("\logout?sessionId="+sessionId,'_self','',true);
+    	} else {
+    		window.open("\loginPage",'_self','',true);
+    	}
+    }
+    
+    function criteriaChange1() {
+    	document.getElementById("criteria").innerHTML = 'keywords';
+    }
+    
+	function criteriaChange2() {
+		document.getElementById("criteria").innerHTML = 'product id';
+    }
+    
+	function criteriaChange3() {
+		document.getElementById("criteria").innerHTML = 'category';
+	}
+	
+	function getProducts() {
+		var callBack = 'callbackTab';
+		var	search = 	$('#search').val();
+		var param =		document.getElementById('criteria').innerHTML;
+		
+		if(param === 'product id') {
+			param = 'productId='+search;
+		} else if (param === 'keywords') {
+			param = 'keyword='+search;
+		} else {
+			param = 'category='+search;
+		}
+		var url = '/getProducts?'+param;
+    	$.ajax({
+			url: url,
+			type: 'GET', 
+			dataType: 'json',
+			success: function(data){
+				var responseData = JSON.stringify(data);
+				responseData = eval('(' + responseData + ')');
+				if(callBack || callBack!='')
+				{
+					if(typeof window[callBack] === 'undefined') {
+						alert('Callback function not found.');
+					}else {
+						window[callBack].call(this,responseData);
+					}
+				}		
+			}
+		});
+	}
+	function callbackTab(response){
+		var users = response.productlist;
+		var table = document.getElementById("prodTab");
+		if (users.length > 0) {
+			
+			var old_tbody = document.getElementById("prodTabBody");
+			var new_tbody = document.createElement('tbody');
+			new_tbody.id = 'prodTabBody';
+			for (var i = 0; i < users.length; i++) {
+				
+				var row = new_tbody.insertRow(i);
+				var cell1 = row.insertCell(0);
+				var cell2 = row.insertCell(1);
+				var cell3 = row.insertCell(2);
+				var cell4 = row.insertCell(3);
+				var cell5 = row.insertCell(4);
+				
+				cell1.innerHTML = i+1;
+				cell2.innerHTML = users[i].id;
+				cell3.innerHTML = users[i].title;
+				cell4.innerHTML = users[i].asin;
+				cell5.innerHTML = users[i].groups;
+				
+				
+				
+			}
+			old_tbody.parentNode.replaceChild(new_tbody, old_tbody);
+			table.style.display = 'block';
+			document.getElementById("message").style.display = 'none';
+		} else {
+			table.style.display = 'none';
+			document.getElementById("message").innerHTML = "No Product Found!";
+			document.getElementById("message").style.display = 'block';
+		}
+	}
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">EDISS-EGUPTA</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+            <li role="separator" class="divider"></li>
+            <li><a id="manageProd" href="/modifyProductPage"></a>
+            <li role="separator" class="divider"></li>
+            <li><a id="users" href="/viewUsersPage"></a>
+            <li role="separator" class="divider"></li>
+            <li><a id="username" href="/profilePage"></a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li>
+            <button onclick="onLogin()" type="button" class="btn btn-default navbar-btn">				
+            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> &nbsp; <a id='loginButton' href="#">Login/Register</a>
+            </button>
+           </li>
+      </ul>
+      
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+	<div id="message" class="alert alert-danger" style="display: none"></div>
+	<form onsubmit="getProducts(); return false;">
+       	<div class="input-group">
+  		<span class="input-group-addon"><button id="criteria" type="button" class="btn btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">keywords</button>
+        <ul class="dropdown-menu">
+          <li><a onclick="criteriaChange1();" href="#">keywords</a></li>
+          <li><a onclick="criteriaChange2();" href="#">product id</a></li>
+          <li><a onclick="criteriaChange3();" href="#">category</a></li>
+        </ul></span>
+  		<input id="search" type="text" class="form-control" name="search" aria-describedby="basic-addon1">
+  		<span class="input-group-addon"><button type="submit" class="btn btn-warning btn-xs">search</button></span>
+		</div>
+    </form>
+    <table id='prodTab' class="table" style="display:none">
+   	<thead>
+   	<tr>
+   	<th>#</th>
+   	<th>Product Id</th>
+   	<th>Product</th>
+   	<th>ASIN</th>
+   	<th>Groups</th>
+   	
+   	</tr>
+   	</thead>
+   	<tbody id="prodTabBody">
+   	</tbody>
+   </table>
+</div>
+
+		
+</body>
+</html>

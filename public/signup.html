@@ -1,0 +1,135 @@
+<!-- views/login.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>egupta Project-1</title>
+    <!-- using bootstrap CDN for css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <style>
+        body        { padding-top:80px; }
+    </style>
+    
+</head>
+<body>
+<div class="container">
+
+<div class="col-sm-6 col-sm-offset-3">
+
+    <h2><a href="/"><span class="fa fa-home"></span></a><span class="fa fa-sign-in"></span>Register</h2>
+	<div id="message" class="alert alert-danger" style="display: none"></div>
+    <!-- Registration FORM -->
+    <form id="register" onsubmit="registerFunction(); return false;">
+        <div class="form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control" name="fName" id="fName">
+        </div>
+        
+        <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control" name="lName" id="lName">
+        </div>
+        
+        <div class="form-group">
+            <label>Address Line 1</label>
+            <input type="text" class="form-control" name="address" id="address">
+        </div>
+        
+         <div class="form-group">
+            <label>City</label>
+            <input type="text" class="form-control" name="city" id="city">
+        </div>
+        
+        <div class="form-group">
+            <label>State</label>
+            <input type="text" class="form-control" name="state" id="state">
+        </div>
+        
+        <div class="form-group">
+            <label>Zip Code</label>
+            <input type="number" id="zip" class="form-control" name="zip" min="10000" max="99999">
+        </div>
+        
+        <div class="form-group">
+            <label>email</label>
+            <input type="text" class="form-control" name="email" id="email">
+        </div>
+        
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" class="form-control" name="uName" id="uName">
+        </div>
+        
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" name="pWord" id="pWord">
+        </div>
+
+        <button id="RegisterButton" type="submit" class="btn btn-warning btn-lg">Register</button>
+    </form>
+
+    <hr>
+
+</div>
+
+</div>
+<script type="text/javascript">
+    
+    	function registerFunction() {
+    		
+    		var input = {
+    				'fName' : 	$('#fName').val(),
+    				'lName' :	$('#lName').val(),	
+    				'address' :	$('#address').val(),
+    				'city'	:	$('#city').val(),
+    				'state' :	$('#state').val(),
+    				'zip'	:	$('#zip').val(),
+    				'email'	:	$('#email').val(),
+    				'uName'	:	$('#uName').val(),
+    				'pWord'	:	$('#pWord').val()
+    		};
+    		
+ 			var jsonData = JSON.stringify(input);
+ 			var url = "/registerUser";
+ 			var callBack = "callbackRegister";
+    		$.ajax({
+    			type: 'post',
+    			url: url,
+    			data: jsonData,
+    			dataType: 'json',
+    			contentType: "application/json", 
+    			processdata: true, //True or False
+    		    crossDomain: true,
+    			success: function(data, status) {
+    				var responseData = JSON.stringify(data);
+    				responseData = eval('(' + responseData + ')');
+    				if(callBack || callBack!='')
+    				{
+    					if(typeof window[callBack] === 'undefined') alert('Callback function not found.');
+    					else window[callBack].call(this,responseData);
+    				}		
+    			},
+    			error: function(xhr, status, e) {
+    				alert('In failure: ' + e);
+    			}
+    		});
+    		
+    	}
+    	
+    	function callbackRegister(response) {
+    		if (response.status === 'f') {
+    			document.getElementById('message').className = 'alert alert-danger';
+    			
+    		} else {
+    			document.getElementById('message').className = 'alert alert-success';
+    			document.getElementById('register').style.display = 'none';
+    		}
+    		document.getElementById('message').innerHTML = response.message;
+    		document.getElementById('message').style.display = 'block';
+    	}
+    
+    </script>
+</body>
+</html>
