@@ -113,19 +113,19 @@
     	function registerFunction() {
     		
     		var input = {
-    				'fName' : 	$('#fName').val(),
-    				'lName' :	$('#lName').val(),	
+    				'fname' : 	$('#fName').val(),
+    				'lname' :	$('#lName').val(),	
     				'address' :	$('#address').val(),
     				'city'	:	$('#city').val(),
     				'state' :	$('#state').val(),
     				'zip'	:	$('#zip').val(),
     				'email'	:	$('#email').val(),
-    				'uName'	:	$('#uName').val(),
-    				'pWord'	:	$('#pWord').val()
+    				'username'	:	$('#uName').val(),
+    				'password'	:	$('#pWord').val()
     		};
     		
  			var jsonData = JSON.stringify(input);
- 			var url = "/updateProfile";
+ 			var url = "/updateInfo";
  			var callBack = "callbackRegister";
     		$.ajax({
     			type: 'post',

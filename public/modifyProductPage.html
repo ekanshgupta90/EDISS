@@ -133,7 +133,7 @@ function registerFunction() {
     	}
     	
     	function callbackRegister2(response) {
-    		var users = response.productlist;
+    		var users = response.product_list;
     		if (users.length > 0) {
     			productId = users[0].id;
     			document.getElementById('pid').innerHTML = 'Product Id = ' + users[0].id;

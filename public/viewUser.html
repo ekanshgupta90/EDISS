@@ -66,12 +66,13 @@
     		
     		var	search = 	$('#search').val();
     		var param =		document.getElementById('criteria').innerHTML;
+    		var url = "";
     		if (param === 'First Name') {
-    			param = 'fName';
+    			url = "/viewUsers?fname="+search;
     		} else {
-    			param = 'lName';
+    			url = "/viewUsers?lanme="+search;
     		}
- 			var url = "/viewUsers?search="+search+"&param="+param;
+ 			
  			var callBack = "callbackRegister";
  			$.ajax({
     			url: url,
@@ -94,7 +95,7 @@
     	}
     	
     	function callbackRegister(response) {
-    		var users = response.userlist;
+    		var users = response.user_list;
     		var table = document.getElementById("userTab");
     		var old_tbody = document.getElementById("userTabBody");
     		var new_tbody = document.createElement('tbody');

@@ -11,7 +11,15 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 	/**
 	 * 
 	 */
-	app.use(session({secret:'helpme0000', cookie:{maxAge:15*60*1000}}));
+	//app.use(cookieParser);
+	//app.use(session({secret:'helpme0000', cookie:{maxAge:15*60*1000}}));
+
+	app.use(session({
+		  cookieName: 'mySession', // cookie name dictates the key name added to the request object
+		  secret: 'helpme0000', // should be a large unguessable string
+		  duration: 24 * 60 * 60 * 1000, // how long the session will stay valid in ms
+		  activeDuration: 1000 * 60 * 5 // if expiresIn < activeDuration, the session will be extended by activeDuration milliseconds
+		}));
 	
 	/**
 	 * Setting body parser for reading the request body
@@ -22,7 +30,7 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 	
 	app.get('/', function (request, response){
 		logger.info("Home page request!");
-		var sess = request.session;
+		var sess = request.mySession;
 		
 		if (sess.username) {
 			response.redirect('/home');
@@ -33,7 +41,7 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 	app.get('/loginPage', function (request, response){
 		logger.info("Login page request!");
 		
-		var sess = request.session;
+		var sess = request.mySession;
 		
 		if (sess.username) {
 			response.redirect('/home');
@@ -43,7 +51,7 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 	
 	app.get('/register', function (request, response){
 		logger.info("Signup page request!");
-		var sess = request.session;
+		var sess = request.mySession;
 		
 		if (sess.username) {
 			response.redirect('/home');
@@ -53,7 +61,7 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 	
 	app.get('/getSession', function (request, response){
 		logger.info("Session check request!");
-		var sess = request.session;
+		var sess = request.mySession;
 		
 		if (sess.username) {
 			response.json({username:sess.username, role:sess.role, sessionId:sess.sessionId});
@@ -65,12 +73,13 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 	
 	app.get('/logout', function (request, response){
 		logger.info("Session check request!");
-		var sess = request.session;
+		var sess = request.mySession;
 		
 		if (sess.username) {
 			sess.username = '';
 			sess.role = '';
 			sess.sessionId = '';
+			response.cookie('mySession', sess)
 			response.redirect('/');
 		} else {
 			response.redirect('/');
@@ -79,30 +88,32 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 	});
 	
 	app.get('/viewUsersPage', function (request, response) {
-		var sess = request.session;
+		var sess = request.mySession;
 		console.log(sess.username + sess.role);
-		if(sess.username != null || sess.role !== 'admin') {
+		if(!sess.username || sess.role !== 'admin') {
 			response.redirect('/');
 		}
 		response.render('viewUser.html');
 	});
 	
 	app.get('/viewUsers', function (request, response) {
-		var sess = request.session;
+		var sess = request.mySession;
 		if(!sess.username && sess.role !== admin) {
 			response.redirect('/');
 		}
 		
 		console.log(request.query.search);
-		var key = request.query.search;
-		var param = request.query.param;
-		var query1 = "";
-		if (param === 'fName') {
+		var query1 = "", key = [];
+		if (request.query.fname) {
 			query1 = "SELECT * FROM User_Details WHERE fName like ?";
-		} else {
+			key.push('%'+request.query.fname+'%');
+		} else if (request.query.fname) {
 			query1 = "SELECT * FROM User_Details WHERE lName like ?";
+			key.push('%'+request.query.lname+'%');
+		} else {
+			response.json({user_list:[]});
 		}
-		connection.query(query1,['%'+key+'%'], function (err, rows, fields) {
+		connection.query(query1,key, function (err, rows, fields) {
 			if (!err) {
 				if (rows.length > 0) {
 					var usersArray = new Array();
@@ -119,9 +130,9 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 						};
 						usersArray.push(user);
 					}
-					response.json({userlist:usersArray});
+					response.json({user_list:usersArray});
 				} else {
-					response.json({userlist:[]});
+					response.json({user_list:[]});
 				}
 			}
 		});
@@ -129,7 +140,7 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 	
 	app.get('/profilePage', function (request, response){
 		logger.info("Session check request!");
-		var sess = request.session;
+		var sess = request.mySession;
 		
 		if (sess.username) {
 			response.render('profile.html');
@@ -141,7 +152,7 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 	
 	app.get('/profile', function (request, response){
 		logger.info("Session check request!");
-		var sess = request.session;
+		var sess = request.mySession;
 		console.log(sess.username);
 		if (sess.username) {
 			connection.query('SELECT * FROM User_Details WHERE uName = ?',[sess.username],function (err,rows,field) {
@@ -172,23 +183,21 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 	});
 	
 	app.get('/home', function (request, response){
+		if(request.mySession) {
+			logger.debug(request.mySession);
+		}
 		logger.info("Home page request!");
-		response.render('users.html',{'username':'egupta'});
+		response.render('users.html');
 	});
 	
 	app.post('/registerUser', function (request, response) {
 		logger.info("New user!");
-		var sess = request.session;
-		
-		if (sess.username) {
-			response.redirect('/home');
-		}
 		var success = true;
 		connection.query("INSERT INTO User_Details (fName,lName,address,city,state,zip,email,uName) values (?,?,?,?,?,?,?,?)",
-				[request.body.fName, request.body.lName, request.body.address, request.body.city, request.body.state, request.body.zip, 
-				request.body.email, request.body.uName],function (error, rows, fields) {
+				[request.body.fname, request.body.lname, request.body.address, request.body.city, request.body.state, request.body.zip, 
+				request.body.email, request.body.username],function (error, rows, fields) {
 			if (!error) {
-				connection.query("INSERT INTO Users (uName,password,role) values (?,?,?)",[request.body.uName, request.body.pWord,'user'], function (err1,rows1,field1) {
+				connection.query("INSERT INTO Users (uName,password,role) values (?,?,?)",[request.body.username, request.body.password,'user'], function (err1,rows1,field1) {
 					if (!err1) {
 						response.json({'status' : 's', 'message' : 'Your account has been registered'});
 					} else {
@@ -198,13 +207,14 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 			} else {
 				logger.error(error);
 				success = false;
+				response.json({'status' : 'f', 'message' : 'There was a problem with your registration'});
 			}
 		});
 	});
 	
-	app.post('/updateProfile', function (request, response) {
+	app.post('/updateInfo', function (request, response) {
 		logger.info("update user!");
-		var sess = request.session;
+		var sess = request.mySession;
 		
 		if (!sess.username) {
 			response.redirect('/');
@@ -213,22 +223,22 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 		var query1 = '',mess = [];
 		if (request.body.pWord !== null || request.body.pWord !== '') {
 			query1 = 'Update Users set password = ? where uName = ?';
-			mess.push(request.body.pWord);
-			mess.push(request.body.uName);
+			mess.push(request.body.password);
+			mess.push(request.body.username);
 			
 		} else {
 			query1 = 'select * from Users where uName = ?';
-			mess.push(request.body.uName);
+			mess.push(request.body.username);
 		}
-		if (request.body.fName === null) {
-			fName = '';
+		if (request.body.fname === null) {
+			fname = '';
 		} else {
-			fName = request.body.fName;
+			fname = request.body.fname;
 		} 
-		if (request.body.lName === null) {
-			lName = '';
+		if (request.body.lname === null) {
+			lname = '';
 		} else {
-			lName = request.body.lName;
+			lname = request.body.lname;
 		}
 		if (request.body.address === null) {
 			address = '';
@@ -259,8 +269,8 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 			
 			if (!error) {
 				connection.query("Update User_Details set fName = ?,lName = ?,address = ?,city = ?,state = ?,zip = ?,email = ? where uName = ?",
-						[fName, lName, address, city, state, zip, 
-						email, request.body.uName], function (err1,rows1,field1) {
+						[fname, lname, address, city, state, zip, 
+						email, request.body.username], function (err1,rows1,field1) {
 					if (!err1) {
 						console.log('update user quesry 1');
 						response.json({'status' : 's', 'message' : 'Your account has been updated'});
@@ -272,15 +282,22 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 			} else {
 				logger.error(error);
 				success = false;
+				response.json({'status' : 'f', 'message' : 'There was a problem with your updation'});
+				
 			}
 		});
+	});
+	
+	app.get('/healthCheck', function(request,response) {
+		response.statusCode = 200;
+		response.send();
 	});
 
 	app.post('/login', function (request, response) {
 		
-		var sess = request.session;
-		logger.info("Login Request");
 		
+		logger.info("Login Request");
+		var sess = request.mySession;
 		logger.debug(request.body.username + request.body.password);
 		
 		logger.debug ('going to db login');
@@ -296,9 +313,11 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 				sess.sessionId = sessId;
 				if (rows[0].role === 'admin') {
 					sess.role = 'admin';
+					response.cookie('mySession', sess);
 					response.json({status:'s',username:request.body.username,err_message:"",sessionID:sess.sessionId,menu:['search','update_product','view_user']});
 				} else {
 					sess.role = 'user';
+					response.cookie('mySession', sess);
 					response.json({status:'s',username:request.body.username,err_message:"",sessionID:sess.sessionId,menu:['search']});
 				}
 			} else {
@@ -329,20 +348,22 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 		var par = [];
 		if (category) {
 			console.log(category);
-			query1 = "SELECT * FROM category_master WHERE category_name = ?";
-			par.push(category);
+			query1 = "SELECT * FROM category_master WHERE category_name like ? or category_parent like ?";
+			par.push('%',category,'%');
+			par.push('%',category,'%');
 			connection.query(query1, par, function (err, rows, fields) {
 				if (!err) {
 					if (rows.length > 0) {
 						console.log(rows);
-						var cat_id = rows[0].category_id;
+						var cat_id = '%';
+						cat_id += rows[0].category_id + '%';
 						console.log(cat_id);
 						if (keyword) {
 							console.log('in keyword search');
 							query1 = "SELECT * FROM product WHERE title like ? AND category_key like ?";
 							par = new Array();
 							par.push('%'+keyword+'%');
-							par.push('%'+cat_id+'%');
+							par.push(cat_id);
 							connection.query(query1,par,function(err,rows,fields){
 								if(!err) {
 									if (rows.length > 0) {
@@ -357,11 +378,11 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 											};
 											usersArray.push(product);
 										}
-										response.json({productlist:usersArray});
+										response.json({product_list:usersArray});
 									}
 								} else {
 									logger.error(err);
-									response.json({productlist:[]});
+									response.json({product_list:[]});
 								}
 							});
 						} else {
@@ -384,22 +405,22 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 											};
 											usersArray.push(product);
 										}
-										response.json({productlist:usersArray});
+										response.json({product_list:usersArray});
 									} else {
-										response.json({productlist:[]});
+										response.json({product_list:[]});
 									}
 								} else {
 									logger.error(err);
-									response.json({productlist:[]});
+									response.json({product_list:[]});
 								}
 							});
 						}
 					} else {
-						response.json({productlist:[]});
+						response.json({product_list:[]});
 					}
 				} else {
 					logger.error (err);
-					response.json({productlist:[]});
+					response.json({product_list:[]});
 				}
 			});
 		} else {
@@ -408,7 +429,7 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 				par.push('%'+keyword+'%');
 			} else if (productId){
 				query1 = "SELECT * FROM product WHERE id = ?";
-				par.push (key);
+				par.push (productId);
 			} 
 			connection.query(query1,par, function (err, rows, fields) {
 				if (!err) {
@@ -424,9 +445,9 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 							};
 							usersArray.push(product);
 						}
-						response.json({productlist:usersArray});
+						response.json({product_list:usersArray});
 					} else {
-						response.json({productlist:[]});
+						response.json({product_list:[]});
 					}
 				}
 			});
@@ -434,7 +455,7 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 	});
 	
 app.get('/modifyProductPage', function (request, response) {
-	var sess = request.session;
+	var sess = request.mySession;
 	if(!sess.username || sess.role !== 'admin') {
 		response.redirect('/');
 	}
@@ -443,7 +464,7 @@ app.get('/modifyProductPage', function (request, response) {
 	});
 	
 	app.post('/modifyProduct', function (request, response) {
-		var sess = request.session;
+		var sess = request.mySession;
 		if(!sess.username || sess.role !== 'admin') {
 			response.redirect('/');
 		}
@@ -455,38 +476,6 @@ app.get('/modifyProductPage', function (request, response) {
 				response.json({'status' : 'f', 'message' : 'There was a problem with your updation'});
 			}
 		});
-	});
-	
-	app.post('/answer', function (request, response){
-		
-		logger.info("Answer Page Request");
-		
-		logger.debug(request.body.username + "," + request.body.question1 + "," + request.body.question2 + "," + request.body.question3);
-		
-		var intq1 = parseInt(request.body.question1);
-		var intq2 = parseInt(request.body.question2);
-		var intq3 = parseInt(request.body.question3);
-		
-		var data = {
-			question1 : intq1,
-			question2 : intq2,
-			question3 : intq3
-		};
-		
-		if (intq1 === 0 || intq2 === 0 || intq3 === 0) {
-			response.render('welcome.ejs',{username:request.body.username, question1:0, question2:0, question3:0, status: 'f', message:"'0' is not an excepted value!"});
-		}
-		
-		connection.query("UPDATE Users SET ? WHERE email = ?",[data, request.body.username], function (error, rows, fields) {
-			if (!error) {
-					response.render('welcome.ejs',{username:request.body.username, question1:intq1, question2:intq2, question3:intq3, status: 's', message:"Successfully added!"});
-			} else {
-					console.log(error);
-					response.render('welcome.ejs',{message:"Something went wrong!",username:request.body.username, question1:0, status: 'f'});
-			}
-		}); 
-		
-		
 	});
 
 };

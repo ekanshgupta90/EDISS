@@ -3087,3 +3087,1273 @@
 2015-09-17T03:14:45.429Z - info: Server up and running on port 8081!
 2015-09-17T03:14:47.651Z - info: Home page request!
 2015-09-17T03:14:47.969Z - info: Session check request!
+2015-09-17T03:46:35.154Z - info: Server up and running on port 8081!
+2015-09-17T03:46:39.019Z - info: Home page request!
+2015-09-17T03:46:39.296Z - info: Session check request!
+2015-09-17T03:47:09.536Z - info: Server up and running on port 8081!
+2015-09-17T03:47:12.149Z - info: Home page request!
+2015-09-17T03:47:12.448Z - info: Session check request!
+2015-09-17T04:02:11.235Z - info: Server up and running on port 8081!
+2015-09-17T04:02:17.577Z - info: Login page request!
+2015-09-17T04:02:21.398Z - info: Login Request
+2015-09-17T04:02:21.399Z - debug: jadminadmin
+2015-09-17T04:02:21.399Z - debug: going to db login
+2015-09-17T04:02:21.427Z - debug: User found in db!
+2015-09-17T04:02:21.453Z - info: Home page request!
+2015-09-17T04:02:22.378Z - info: Session check request!
+2015-09-30T20:16:41.704Z - info: Server up and running on port 8081!
+2015-09-30T20:16:41.726Z - error: uncaughtException: getaddrinfo ENOTFOUND ediss-db.c47a5hmpj9xh.us-east-1.rds.amazonaws.com date=Wed Sep 30 2015 16:16:41 GMT-0400 (EDT), pid=680, uid=501, gid=20, cwd=/Users/egupta/workspace/Scalable Systems/EDISS, execPath=/usr/local/bin/node, version=v0.12.7, argv=[/usr/local/bin/node, /Users/egupta/workspace/Scalable Systems/EDISS/server.js], rss=39936000, heapTotal=31598080, heapUsed=17879304, loadavg=[1.880859375, 2.07373046875, 2.0859375], uptime=42379, trace=[column=10, file=dns.js, function=errnoException, line=44, method=null, native=false, column=26, file=dns.js, function=GetAddrInfoReqWrap.onlookup [as oncomplete], line=94, method=onlookup [as oncomplete], native=false, column=null, file=    --------------------, function=null, line=null, method=null, native=null, column=48, file=/Users/egupta/node_modules/mysql/lib/protocol/Protocol.js, function=Protocol._enqueue, line=135, method=_enqueue, native=false, column=41, file=/Users/egupta/node_modules/mysql/lib/protocol/Protocol.js, function=Protocol.handshake, line=52, method=handshake, native=false, column=18, file=/Users/egupta/node_modules/mysql/lib/Connection.js, function=Connection.connect, line=123, method=connect, native=false, column=13, file=Systems/EDISS/app/routes.js, function=module.exports (/Users/egupta/workspace/Scalable, line=9, method=exports (/Users/egupta/workspace/Scalable, native=false, column=24, file=Systems/EDISS/server.js, function=Object.<anonymous> (/Users/egupta/workspace/Scalable, line=56, method=<anonymous> (/Users/egupta/workspace/Scalable, native=false, column=26, file=module.js, function=Module._compile, line=460, method=_compile, native=false, column=10, file=module.js, function=Object.Module._extensions..js, line=478, method=Module._extensions..js, native=false, column=32, file=module.js, function=Module.load, line=355, method=load, native=false, column=12, file=module.js, function=Function.Module._load, line=310, method=Module._load, native=false, column=10, file=module.js, function=Function.Module.runMain, line=501, method=Module.runMain, native=false], stack=[Error: getaddrinfo ENOTFOUND ediss-db.c47a5hmpj9xh.us-east-1.rds.amazonaws.com,     at errnoException (dns.js:44:10),     at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:94:26),     --------------------,     at Protocol._enqueue (/Users/egupta/node_modules/mysql/lib/protocol/Protocol.js:135:48),     at Protocol.handshake (/Users/egupta/node_modules/mysql/lib/protocol/Protocol.js:52:41),     at Connection.connect (/Users/egupta/node_modules/mysql/lib/Connection.js:123:18),     at module.exports (/Users/egupta/workspace/Scalable Systems/EDISS/app/routes.js:9:13),     at Object.<anonymous> (/Users/egupta/workspace/Scalable Systems/EDISS/server.js:56:24),     at Module._compile (module.js:460:26),     at Object.Module._extensions..js (module.js:478:10),     at Module.load (module.js:355:32),     at Function.Module._load (module.js:310:12),     at Function.Module.runMain (module.js:501:10)]
+2015-09-30T20:28:55.442Z - info: Server up and running on port 8081!
+2015-09-30T20:35:27.732Z - info: Server up and running on port 8081!
+2015-09-30T20:35:45.132Z - info: Home page request!
+2015-09-30T20:35:45.481Z - info: Session check request!
+2015-09-30T20:35:47.326Z - info: Login page request!
+2015-09-30T21:09:06.361Z - info: Server up and running on port 8081!
+2015-09-30T21:10:35.948Z - info: Server up and running on port 8081!
+2015-09-30T21:11:03.787Z - info: Server up and running on port 8081!
+2015-09-30T21:11:07.357Z - info: Home page request!
+2015-09-30T21:11:07.632Z - info: Session check request!
+2015-09-30T21:11:15.348Z - info: Login page request!
+2015-09-30T21:11:21.294Z - info: Login Request
+2015-09-30T21:11:21.295Z - debug: jadminadmin
+2015-09-30T21:11:21.295Z - debug: going to db login
+2015-09-30T21:11:21.312Z - debug: User found in db!
+2015-09-30T21:11:21.334Z - info: Home page request!
+2015-09-30T21:11:21.654Z - info: Session check request!
+2015-09-30T21:11:42.777Z - info: Home page request!
+2015-09-30T21:11:43.239Z - info: Session check request!
+2015-09-30T21:13:35.849Z - info: Server up and running on port 8081!
+2015-09-30T21:13:41.974Z - info: Home page request!
+2015-09-30T21:13:42.427Z - info: Session check request!
+2015-09-30T21:13:47.193Z - info: Login page request!
+2015-09-30T21:14:03.314Z - info: Login Request
+2015-09-30T21:14:03.315Z - debug: jadminadmin
+2015-09-30T21:14:03.315Z - debug: going to db login
+2015-09-30T21:14:03.329Z - debug: User found in db!
+2015-09-30T21:16:17.069Z - info: Server up and running on port 8081!
+2015-09-30T21:16:22.721Z - info: Home page request!
+2015-09-30T21:16:23.245Z - info: Session check request!
+2015-09-30T21:16:24.313Z - info: Login page request!
+2015-09-30T21:16:39.770Z - info: Login Request
+2015-09-30T21:16:39.770Z - debug: jadminjadmin
+2015-09-30T21:16:39.773Z - debug: going to db login
+2015-09-30T21:16:45.268Z - info: Login Request
+2015-09-30T21:16:45.268Z - debug: jadminadmin
+2015-09-30T21:16:45.268Z - debug: going to db login
+2015-09-30T21:16:45.282Z - debug: User found in db!
+2015-09-30T21:34:52.058Z - info: Server up and running on port 8081!
+2015-09-30T21:35:01.243Z - info: Login Request
+2015-09-30T21:35:01.244Z - debug: jadminadmin
+2015-09-30T21:35:01.244Z - debug: going to db login
+2015-09-30T21:35:01.264Z - debug: User found in db!
+2015-09-30T21:37:29.274Z - info: Login Request
+2015-09-30T21:37:29.274Z - debug: jadminadmin
+2015-09-30T21:37:29.274Z - debug: going to db login
+2015-09-30T21:37:29.291Z - debug: User found in db!
+2015-09-30T21:37:47.140Z - info: Server up and running on port 8081!
+2015-09-30T21:38:24.871Z - info: Login Request
+2015-09-30T21:38:24.872Z - debug: jadminadmin
+2015-09-30T21:38:24.873Z - debug: going to db login
+2015-09-30T21:38:24.895Z - debug: User found in db!
+2015-09-30T21:38:47.963Z - info: Login Request
+2015-09-30T21:38:47.963Z - debug: jadminadmin
+2015-09-30T21:38:47.963Z - debug: going to db login
+2015-09-30T21:38:47.975Z - debug: User found in db!
+2015-09-30T21:46:18.745Z - info: Server up and running on port 8081!
+2015-09-30T21:46:29.479Z - info: Login Request
+2015-09-30T21:46:29.479Z - debug: jadminadmin
+2015-09-30T21:46:29.480Z - debug: going to db login
+2015-09-30T21:46:29.498Z - debug: User found in db!
+2015-09-30T21:46:47.086Z - info: Home page request!
+2015-09-30T21:46:47.974Z - info: Session check request!
+2015-09-30T21:46:51.967Z - info: Login page request!
+2015-09-30T21:46:58.691Z - info: Login Request
+2015-09-30T21:46:58.691Z - debug: hsmithsmith
+2015-09-30T21:46:58.692Z - debug: going to db login
+2015-09-30T21:46:58.706Z - debug: User found in db!
+2015-09-30T22:01:10.044Z - info: Server up and running on port 8081!
+2015-09-30T22:01:15.691Z - info: Login Request
+2015-09-30T22:01:15.692Z - debug: jadminadmin
+2015-09-30T22:01:15.692Z - debug: going to db login
+2015-09-30T22:01:15.711Z - debug: User found in db!
+2015-09-30T22:02:05.617Z - info: Server up and running on port 8081!
+2015-09-30T22:02:10.292Z - info: Login Request
+2015-09-30T22:02:10.293Z - debug: jadminadmin
+2015-09-30T22:02:10.294Z - debug: going to db login
+2015-09-30T22:02:10.311Z - debug: User found in db!
+2015-09-30T22:02:13.796Z - debug:  objectMode=false, highWaterMark=16384, buffer=[], length=0, pipes=null, pipesCount=0, flowing=null, ended=true, endEmitted=false, reading=false, sync=true, needReadable=false, emittedReadable=true, readableListening=false, defaultEncoding=utf8, ranOut=false, awaitDrain=0, readingMore=false, decoder=null, encoding=null, readable=true, domain=null, , _maxListeners=undefined, _connecting=false, _hadError=false, fd=15, reading=true, $ref=$["socket"], onread=function onread(nread, buffer) {
+  var handle = this;
+  var self = handle.owner;
+  assert(handle === self._handle, 'handle != self._handle');
+
+  self._unrefTimer();
+
+  debug('onread', nread);
+
+  if (nread > 0) {
+    debug('got data');
+
+    // read success.
+    // In theory (and in practice) calling readStop right now
+    // will prevent this from being called again until _read() gets
+    // called again.
+
+    // if it's not enough data, we'll just call handle.readStart()
+    // again right away.
+    self.bytesRead += nread;
+
+    // Optimization: emit the original buffer with end points
+    var ret = self.push(buffer);
+
+    if (handle.reading && !ret) {
+      handle.reading = false;
+      debug('readStop');
+      var err = handle.readStop();
+      if (err)
+        self._destroy(errnoException(err, 'read'));
+    }
+    return;
+  }
+
+  // if we didn't get any bytes, that doesn't necessarily mean EOF.
+  // wait for the next one.
+  if (nread === 0) {
+    debug('not any data, keep waiting');
+    return;
+  }
+
+  // Error, possibly EOF.
+  if (nread !== uv.UV_EOF) {
+    return self._destroy(errnoException(nread, 'read'));
+  }
+
+  debug('EOF');
+
+  if (self._readableState.length === 0) {
+    self.readable = false;
+    maybeDestroy(self);
+  }
+
+  // push a null to signal the end of data.
+  self.push(null);
+
+  // internal end event so that we know that the actual socket
+  // is no longer readable, and we can start the shutdown
+  // procedure. No need to wait for all the data to be consumed.
+  self.emit('_socketEnd');
+}, onconnection=null, writeQueueSize=0, _parent=null, _host=null, objectMode=false, highWaterMark=16384, buffer=[], length=0, pipes=null, pipesCount=0, flowing=true, ended=false, endEmitted=false, reading=true, sync=false, needReadable=true, emittedReadable=false, readableListening=false, defaultEncoding=utf8, ranOut=false, awaitDrain=0, readingMore=false, decoder=null, encoding=null, resumeScheduled=false, readable=true, domain=null, end=[function g() {
+    this.removeListener(type, g);
+
+    if (!fired) {
+      fired = true;
+      listener.apply(this, arguments);
+    }
+  }, function socketOnEnd() {
+    var socket = this;
+    var ret = parser.finish();
+
+    if (ret instanceof Error) {
+      debug('parse error');
+      socket.destroy(ret);
+      return;
+    }
+
+    if (!self.httpAllowHalfOpen) {
+      abortIncoming();
+      if (socket.writable) socket.end();
+    } else if (outgoing.length) {
+      outgoing[outgoing.length - 1]._last = true;
+    } else if (socket._httpMessage) {
+      socket._httpMessage._last = true;
+    } else {
+      if (socket.writable) socket.end();
+    }
+  }], finish=function onSocketFinish() {
+  // If still connecting - defer handling 'finish' until 'connect' will happen
+  if (this._connecting) {
+    debug('osF: not yet connected');
+    return this.once('connect', onSocketFinish);
+  }
+
+  debug('onSocketFinish');
+  if (!this.readable || this._readableState.ended) {
+    debug('oSF: ended, destroy', this._readableState);
+    return this.destroy();
+  }
+
+  debug('oSF: not ended, call shutdown()');
+
+  // otherwise, just shutdown, or destroy() if not possible
+  if (!this._handle || !this._handle.shutdown)
+    return this.destroy();
+
+  var req = new ShutdownWrap();
+  req.oncomplete = afterShutdown;
+  var err = this._handle.shutdown(req);
+
+  if (err)
+    return this._destroy(errnoException(err, 'shutdown'));
+}, _socketEnd=function onSocketEnd() {
+  // XXX Should not have to do as much crap in this function.
+  // ended should already be true, since this is called *after*
+  // the EOF errno and onread has eof'ed
+  debug('onSocketEnd', this._readableState);
+  this._readableState.ended = true;
+  if (this._readableState.endEmitted) {
+    this.readable = false;
+    maybeDestroy(this);
+  } else {
+    this.once('end', function() {
+      this.readable = false;
+      maybeDestroy(this);
+    });
+    this.read(0);
+  }
+
+  if (!this.allowHalfOpen) {
+    this.write = writeAfterFIN;
+    this.destroySoon();
+  }
+}, drain=[function ondrain() {
+  if (this._httpMessage) this._httpMessage.emit('drain');
+}, function socketOnDrain() {
+    // If we previously paused, then start reading again.
+    if (socket._paused) {
+      socket._paused = false;
+      socket.parser.resume();
+      socket.resume();
+    }
+  }], timeout=function () {
+    var req = socket.parser && socket.parser.incoming;
+    var reqTimeout = req && !req.complete && req.emit('timeout', socket);
+    var res = socket._httpMessage;
+    var resTimeout = res && res.emit('timeout', socket);
+    var serverTimeout = self.emit('timeout', socket);
+
+    if (!reqTimeout && !resTimeout && !serverTimeout)
+      socket.destroy();
+  }, error=function socketOnError(e) {
+    self.emit('clientError', e, this);
+  }, close=[function serverSocketCloseListener() {
+    debug('server socket close');
+    // mark this parser as reusable
+    if (this.parser) {
+      freeParser(this.parser, null, this);
+    }
+
+    abortIncoming();
+  }, function onServerResponseClose() {
+  // EventEmitter.emit makes a copy of the 'close' listeners array before
+  // calling the listeners. detachSocket() unregisters onServerResponseClose
+  // but if detachSocket() is called, directly or indirectly, by a 'close'
+  // listener, onServerResponseClose is still in that copy of the listeners
+  // array. That is, in the example below, b still gets called even though
+  // it's been removed by a:
+  //
+  //   var obj = new events.EventEmitter;
+  //   obj.on('event', a);
+  //   obj.on('event', b);
+  //   function a() { obj.removeListener('event', b) }
+  //   function b() { throw "BAM!" }
+  //   obj.emit('event');  // throws
+  //
+  // Ergo, we need to deal with stale 'close' events and handle the case
+  // where the ServerResponse object has already been deconstructed.
+  // Fortunately, that requires only a single if check. :-)
+  if (this._httpMessage) this._httpMessage.emit('close');
+}], data=function socketOnData(d) {
+    assert(!socket._paused);
+    debug('SERVER socketOnData %d', d.length);
+    var ret = parser.execute(d);
+    if (ret instanceof Error) {
+      debug('parse error');
+      socket.destroy(ret);
+    } else if (parser.incoming && parser.incoming.upgrade) {
+      // Upgrade or CONNECT
+      var bytesParsed = ret;
+      var req = parser.incoming;
+      debug('SERVER upgrade or connect', req.method);
+
+      socket.removeListener('data', socketOnData);
+      socket.removeListener('end', socketOnEnd);
+      socket.removeListener('close', serverSocketCloseListener);
+      parser.finish();
+      freeParser(parser, req, null);
+      parser = null;
+
+      var eventName = req.method === 'CONNECT' ? 'connect' : 'upgrade';
+      if (EventEmitter.listenerCount(self, eventName) > 0) {
+        debug('SERVER have listener for %s', eventName);
+        var bodyHead = d.slice(bytesParsed, d.length);
+
+        // TODO(isaacs): Need a way to reset a stream to fresh state
+        // IE, not flowing, and not explicitly paused.
+        socket._readableState.flowing = null;
+        self.emit(eventName, req, socket, bodyHead);
+      } else {
+        // Got upgrade header or CONNECT method, but have no handler.
+        socket.destroy();
+      }
+    }
+
+    if (socket._paused) {
+      // onIncoming paused the socket, we should pause the parser as well
+      debug('pause parser');
+      socket.parser.pause();
+    }
+  }, _maxListeners=undefined, objectMode=false, highWaterMark=16384, needDrain=false, ending=false, ended=false, finished=false, decodeStrings=false, defaultEncoding=utf8, length=0, writing=false, corked=0, sync=false, bufferProcessing=false, onwrite=function (er) {
+    onwrite(stream, er);
+  }, writecb=null, writelen=0, bufferedRequest=null, lastBufferedRequest=null, pendingcb=0, prefinished=false, errorEmitted=false, writable=true, allowHalfOpen=true, destroyed=false, bytesRead=1606, _bytesDispatched=775, _pendingData=null, _pendingEncoding=, domain=null, request=function (req, res, next) {
+    app.handle(req, res, next);
+  }, connection=function connectionListener(socket) {
+  var self = this;
+  var outgoing = [];
+  var incoming = [];
+
+  function abortIncoming() {
+    while (incoming.length) {
+      var req = incoming.shift();
+      req.emit('aborted');
+      req.emit('close');
+    }
+    // abort socket._httpMessage ?
+  }
+
+  function serverSocketCloseListener() {
+    debug('server socket close');
+    // mark this parser as reusable
+    if (this.parser) {
+      freeParser(this.parser, null, this);
+    }
+
+    abortIncoming();
+  }
+
+  debug('SERVER new http connection');
+
+  httpSocketSetup(socket);
+
+  // If the user has added a listener to the server,
+  // request, or response, then it's their responsibility.
+  // otherwise, destroy on timeout by default
+  if (self.timeout)
+    socket.setTimeout(self.timeout);
+  socket.on('timeout', function() {
+    var req = socket.parser && socket.parser.incoming;
+    var reqTimeout = req && !req.complete && req.emit('timeout', socket);
+    var res = socket._httpMessage;
+    var resTimeout = res && res.emit('timeout', socket);
+    var serverTimeout = self.emit('timeout', socket);
+
+    if (!reqTimeout && !resTimeout && !serverTimeout)
+      socket.destroy();
+  });
+
+  var parser = parsers.alloc();
+  parser.reinitialize(HTTPParser.REQUEST);
+  parser.socket = socket;
+  socket.parser = parser;
+  parser.incoming = null;
+
+  // Propagate headers limit from server instance to parser
+  if (util.isNumber(this.maxHeadersCount)) {
+    parser.maxHeaderPairs = this.maxHeadersCount << 1;
+  } else {
+    // Set default value because parser may be reused from FreeList
+    parser.maxHeaderPairs = 2000;
+  }
+
+  socket.addListener('error', socketOnError);
+  socket.addListener('close', serverSocketCloseListener);
+  parser.onIncoming = parserOnIncoming;
+  socket.on('end', socketOnEnd);
+  socket.on('data', socketOnData);
+
+  // TODO(isaacs): Move all these functions out of here
+  function socketOnError(e) {
+    self.emit('clientError', e, this);
+  }
+
+  function socketOnData(d) {
+    assert(!socket._paused);
+    debug('SERVER socketOnData %d', d.length);
+    var ret = parser.execute(d);
+    if (ret instanceof Error) {
+      debug('parse error');
+      socket.destroy(ret);
+    } else if (parser.incoming && parser.incoming.upgrade) {
+      // Upgrade or CONNECT
+      var bytesParsed = ret;
+      var req = parser.incoming;
+      debug('SERVER upgrade or connect', req.method);
+
+      socket.removeListener('data', socketOnData);
+      socket.removeListener('end', socketOnEnd);
+      socket.removeListener('close', serverSocketCloseListener);
+      parser.finish();
+      freeParser(parser, req, null);
+      parser = null;
+
+      var eventName = req.method === 'CONNECT' ? 'connect' : 'upgrade';
+      if (EventEmitter.listenerCount(self, eventName) > 0) {
+        debug('SERVER have listener for %s', eventName);
+        var bodyHead = d.slice(bytesParsed, d.length);
+
+        // TODO(isaacs): Need a way to reset a stream to fresh state
+        // IE, not flowing, and not explicitly paused.
+        socket._readableState.flowing = null;
+        self.emit(eventName, req, socket, bodyHead);
+      } else {
+        // Got upgrade header or CONNECT method, but have no handler.
+        socket.destroy();
+      }
+    }
+
+    if (socket._paused) {
+      // onIncoming paused the socket, we should pause the parser as well
+      debug('pause parser');
+      socket.parser.pause();
+    }
+  }
+
+  function socketOnEnd() {
+    var socket = this;
+    var ret = parser.finish();
+
+    if (ret instanceof Error) {
+      debug('parse error');
+      socket.destroy(ret);
+      return;
+    }
+
+    if (!self.httpAllowHalfOpen) {
+      abortIncoming();
+      if (socket.writable) socket.end();
+    } else if (outgoing.length) {
+      outgoing[outgoing.length - 1]._last = true;
+    } else if (socket._httpMessage) {
+      socket._httpMessage._last = true;
+    } else {
+      if (socket.writable) socket.end();
+    }
+  }
+
+
+  // The following callback is issued after the headers have been read on a
+  // new message. In this callback we setup the response object and pass it
+  // to the user.
+
+  socket._paused = false;
+  function socketOnDrain() {
+    // If we previously paused, then start reading again.
+    if (socket._paused) {
+      socket._paused = false;
+      socket.parser.resume();
+      socket.resume();
+    }
+  }
+  socket.on('drain', socketOnDrain);
+
+  function parserOnIncoming(req, shouldKeepAlive) {
+    incoming.push(req);
+
+    // If the writable end isn't consuming, then stop reading
+    // so that we don't become overwhelmed by a flood of
+    // pipelined requests that may never be resolved.
+    if (!socket._paused) {
+      var needPause = socket._writableState.needDrain;
+      if (needPause) {
+        socket._paused = true;
+        // We also need to pause the parser, but don't do that until after
+        // the call to execute, because we may still be processing the last
+        // chunk.
+        socket.pause();
+      }
+    }
+
+    var res = new ServerResponse(req);
+
+    res.shouldKeepAlive = shouldKeepAlive;
+    DTRACE_HTTP_SERVER_REQUEST(req, socket);
+    ;
+
+    if (socket._httpMessage) {
+      // There are already pending outgoing res, append.
+      outgoing.push(res);
+    } else {
+      res.assignSocket(socket);
+    }
+
+    // When we're finished writing the response, check if this is the last
+    // respose, if so destroy the socket.
+    res.on('prefinish', resOnFinish);
+    function resOnFinish() {
+      // Usually the first incoming element should be our request.  it may
+      // be that in the case abortIncoming() was called that the incoming
+      // array will be empty.
+      assert(incoming.length === 0 || incoming[0] === req);
+
+      incoming.shift();
+
+      // if the user never called req.read(), and didn't pipe() or
+      // .resume() or .on('data'), then we call req._dump() so that the
+      // bytes will be pulled off the wire.
+      if (!req._consuming && !req._readableState.resumeScheduled)
+        req._dump();
+
+      res.detachSocket(socket);
+
+      if (res._last) {
+        socket.destroySoon();
+      } else {
+        // start sending the next message
+        var m = outgoing.shift();
+        if (m) {
+          m.assignSocket(socket);
+        }
+      }
+    }
+
+    if (!util.isUndefined(req.headers.expect) &&
+        (req.httpVersionMajor == 1 && req.httpVersionMinor == 1) &&
+        continueExpression.test(req.headers['expect'])) {
+      res._expect_continue = true;
+      if (EventEmitter.listenerCount(self, 'checkContinue') > 0) {
+        self.emit('checkContinue', req, res);
+      } else {
+        res.writeContinue();
+        self.emit('request', req, res);
+      }
+    } else {
+      self.emit('request', req, res);
+    }
+    return false; // Not a HEAD response. (Not even a response!)
+  }
+}, clientError=function (err, conn) {
+    conn.destroy(err);
+  }, _maxListeners=undefined, _connections=1, fd=13, reading=false, $ref=$["socket"]["server"], onread=null, onconnection=function onconnection(err, clientHandle) {
+  var handle = this;
+  var self = handle.owner;
+
+  debug('onconnection');
+
+  if (err) {
+    self.emit('error', errnoException(err, 'accept'));
+    return;
+  }
+
+  if (self.maxConnections && self._connections >= self.maxConnections) {
+    clientHandle.close();
+    return;
+  }
+
+  var socket = new Socket({
+    handle: clientHandle,
+    allowHalfOpen: self.allowHalfOpen,
+    pauseOnCreate: self.pauseOnConnect
+  });
+  socket.readable = socket.writable = true;
+
+
+  self._connections++;
+  socket.server = self;
+
+  DTRACE_NET_SERVER_CONNECTION(socket);
+  ;
+  self.emit('connection', socket);
+}, writeQueueSize=0, _usingSlaves=false, _slaves=[], allowHalfOpen=true, pauseOnConnect=false, httpAllowHalfOpen=false, timeout=120000, _connectionKey=4:null:8081, _idleTimeout=120000, $ref=$["socket"], $ref=$["socket"], $ref=$["socket"]["_idleNext"], _idleStart=18157023, 0=function parserOnHeaders(headers, url) {
+  // Once we exceeded headers limit - stop collecting them
+  if (this.maxHeaderPairs <= 0 ||
+      this._headers.length < this.maxHeaderPairs) {
+    this._headers = this._headers.concat(headers);
+  }
+  this._url += url;
+}, 1=function parserOnHeadersComplete(info) {
+  debug('parserOnHeadersComplete', info);
+  var parser = this;
+  var headers = info.headers;
+  var url = info.url;
+
+  if (!headers) {
+    headers = parser._headers;
+    parser._headers = [];
+  }
+
+  if (!url) {
+    url = parser._url;
+    parser._url = '';
+  }
+
+  parser.incoming = new IncomingMessage(parser.socket);
+  parser.incoming.httpVersionMajor = info.versionMajor;
+  parser.incoming.httpVersionMinor = info.versionMinor;
+  parser.incoming.httpVersion = info.versionMajor + '.' + info.versionMinor;
+  parser.incoming.url = url;
+
+  var n = headers.length;
+
+  // If parser.maxHeaderPairs <= 0 - assume that there're no limit
+  if (parser.maxHeaderPairs > 0) {
+    n = Math.min(n, parser.maxHeaderPairs);
+  }
+
+  parser.incoming._addHeaderLines(headers, n);
+
+  if (isNumber(info.method)) {
+    // server only
+    parser.incoming.method = HTTPParser.methods[info.method];
+  } else {
+    // client only
+    parser.incoming.statusCode = info.statusCode;
+    parser.incoming.statusMessage = info.statusMessage;
+  }
+
+  parser.incoming.upgrade = info.upgrade;
+
+  var skipBody = false; // response to HEAD or CONNECT
+
+  if (!info.upgrade) {
+    // For upgraded connections and CONNECT method request,
+    // we'll emit this after parser.execute
+    // so that we can capture the first part of the new protocol
+    skipBody = parser.onIncoming(parser.incoming, info.shouldKeepAlive);
+  }
+
+  return skipBody;
+}, 2=function parserOnBody(b, start, len) {
+  var parser = this;
+  var stream = parser.incoming;
+
+  // if the stream has already been removed, then drop it.
+  if (!stream)
+    return;
+
+  var socket = stream.socket;
+
+  // pretend this was the result of a stream._read call.
+  if (len > 0 && !stream._dumped) {
+    var slice = b.slice(start, start + len);
+    var ret = stream.push(slice);
+    if (!ret)
+      readStop(socket);
+  }
+}, 3=function parserOnMessageComplete() {
+  var parser = this;
+  var stream = parser.incoming;
+
+  if (stream) {
+    stream.complete = true;
+    // Emit any trailing headers.
+    var headers = parser._headers;
+    if (headers) {
+      parser.incoming._addHeaderLines(headers, headers.length);
+      parser._headers = [];
+      parser._url = '';
+    }
+
+    if (!stream.upgrade)
+      // For upgraded connections, also emit this after parser.execute
+      stream.push(null);
+  }
+
+  if (stream && !parser.incoming._pendings.length) {
+    // For emit end event
+    stream.push(null);
+  }
+
+  // force to read the next incoming message
+  readStart(parser.socket);
+}, _headers=[], _url=, $ref=$["socket"], $ref=$, maxHeaderPairs=2000, onIncoming=function parserOnIncoming(req, shouldKeepAlive) {
+    incoming.push(req);
+
+    // If the writable end isn't consuming, then stop reading
+    // so that we don't become overwhelmed by a flood of
+    // pipelined requests that may never be resolved.
+    if (!socket._paused) {
+      var needPause = socket._writableState.needDrain;
+      if (needPause) {
+        socket._paused = true;
+        // We also need to pause the parser, but don't do that until after
+        // the call to execute, because we may still be processing the last
+        // chunk.
+        socket.pause();
+      }
+    }
+
+    var res = new ServerResponse(req);
+
+    res.shouldKeepAlive = shouldKeepAlive;
+    DTRACE_HTTP_SERVER_REQUEST(req, socket);
+    ;
+
+    if (socket._httpMessage) {
+      // There are already pending outgoing res, append.
+      outgoing.push(res);
+    } else {
+      res.assignSocket(socket);
+    }
+
+    // When we're finished writing the response, check if this is the last
+    // respose, if so destroy the socket.
+    res.on('prefinish', resOnFinish);
+    function resOnFinish() {
+      // Usually the first incoming element should be our request.  it may
+      // be that in the case abortIncoming() was called that the incoming
+      // array will be empty.
+      assert(incoming.length === 0 || incoming[0] === req);
+
+      incoming.shift();
+
+      // if the user never called req.read(), and didn't pipe() or
+      // .resume() or .on('data'), then we call req._dump() so that the
+      // bytes will be pulled off the wire.
+      if (!req._consuming && !req._readableState.resumeScheduled)
+        req._dump();
+
+      res.detachSocket(socket);
+
+      if (res._last) {
+        socket.destroySoon();
+      } else {
+        // start sending the next message
+        var m = outgoing.shift();
+        if (m) {
+          m.assignSocket(socket);
+        }
+      }
+    }
+
+    if (!util.isUndefined(req.headers.expect) &&
+        (req.httpVersionMajor == 1 && req.httpVersionMinor == 1) &&
+        continueExpression.test(req.headers['expect'])) {
+      res._expect_continue = true;
+      if (EventEmitter.listenerCount(self, 'checkContinue') > 0) {
+        self.emit('checkContinue', req, res);
+      } else {
+        res.writeContinue();
+        self.emit('request', req, res);
+      }
+    } else {
+      self.emit('request', req, res);
+    }
+    return false; // Not a HEAD response. (Not even a response!)
+  }, _paused=false, read=function (n) {
+  debug('read', n);
+  var state = this._readableState;
+  var nOrig = n;
+
+  if (!util.isNumber(n) || n > 0)
+    state.emittedReadable = false;
+
+  // if we're doing read(0) to trigger a readable event, but we
+  // already have a bunch of data in the buffer, then just trigger
+  // the 'readable' event and move on.
+  if (n === 0 &&
+      state.needReadable &&
+      (state.length >= state.highWaterMark || state.ended)) {
+    debug('read: emitReadable', state.length, state.ended);
+    if (state.length === 0 && state.ended)
+      endReadable(this);
+    else
+      emitReadable(this);
+    return null;
+  }
+
+  n = howMuchToRead(n, state);
+
+  // if we've ended, and we're now clear, then finish it up.
+  if (n === 0 && state.ended) {
+    if (state.length === 0)
+      endReadable(this);
+    return null;
+  }
+
+  // All the actual chunk generation logic needs to be
+  // *below* the call to _read.  The reason is that in certain
+  // synthetic stream cases, such as passthrough streams, _read
+  // may be a completely synchronous operation which may change
+  // the state of the read buffer, providing enough data when
+  // before there was *not* enough.
+  //
+  // So, the steps are:
+  // 1. Figure out what the state of things will be after we do
+  // a read from the buffer.
+  //
+  // 2. If that resulting state will trigger a _read, then call _read.
+  // Note that this may be asynchronous, or synchronous.  Yes, it is
+  // deeply ugly to write APIs this way, but that still doesn't mean
+  // that the Readable class should behave improperly, as streams are
+  // designed to be sync/async agnostic.
+  // Take note if the _read call is sync or async (ie, if the read call
+  // has returned yet), so that we know whether or not it's safe to emit
+  // 'readable' etc.
+  //
+  // 3. Actually pull the requested chunks out of the buffer and return.
+
+  // if we need a readable event, then we need to do some reading.
+  var doRead = state.needReadable;
+  debug('need readable', doRead);
+
+  // if we currently have less than the highWaterMark, then also read some
+  if (state.length === 0 || state.length - n < state.highWaterMark) {
+    doRead = true;
+    debug('length less than watermark', doRead);
+  }
+
+  // however, if we've ended, then there's no point, and if we're already
+  // reading, then it's unnecessary.
+  if (state.ended || state.reading) {
+    doRead = false;
+    debug('reading or ended', doRead);
+  }
+
+  if (doRead) {
+    debug('do read');
+    state.reading = true;
+    state.sync = true;
+    // if the length is currently zero, then we *need* a readable event.
+    if (state.length === 0)
+      state.needReadable = true;
+    // call internal read method
+    this._read(state.highWaterMark);
+    state.sync = false;
+  }
+
+  // If _read pushed data synchronously, then `reading` will be false,
+  // and we need to re-evaluate how much data we can return to the user.
+  if (doRead && !state.reading)
+    n = howMuchToRead(nOrig, state);
+
+  var ret;
+  if (n > 0)
+    ret = fromList(n, state);
+  else
+    ret = null;
+
+  if (util.isNull(ret)) {
+    state.needReadable = true;
+    n = 0;
+  }
+
+  state.length -= n;
+
+  // If we have nothing in the buffer, then we want to know
+  // as soon as we *do* get something into the buffer.
+  if (state.length === 0 && !state.ended)
+    state.needReadable = true;
+
+  // If we tried to read() past the EOF, then emit end on the next tick.
+  if (nOrig !== n && state.ended && state.length === 0)
+    endReadable(this);
+
+  if (!util.isNull(ret))
+    this.emit('data', ret);
+
+  return ret;
+}, _consuming=true, domain=null, prefinish=function resOnFinish() {
+      // Usually the first incoming element should be our request.  it may
+      // be that in the case abortIncoming() was called that the incoming
+      // array will be empty.
+      assert(incoming.length === 0 || incoming[0] === req);
+
+      incoming.shift();
+
+      // if the user never called req.read(), and didn't pipe() or
+      // .resume() or .on('data'), then we call req._dump() so that the
+      // bytes will be pulled off the wire.
+      if (!req._consuming && !req._readableState.resumeScheduled)
+        req._dump();
+
+      res.detachSocket(socket);
+
+      if (res._last) {
+        socket.destroySoon();
+      } else {
+        // start sending the next message
+        var m = outgoing.shift();
+        if (m) {
+          m.assignSocket(socket);
+        }
+      }
+    }, _maxListeners=undefined, output=[], outputEncodings=[], outputCallbacks=[], writable=true, _last=false, chunkedEncoding=false, shouldKeepAlive=true, useChunkedEncodingByDefault=true, sendDate=true, , _hasBody=true, _trailer=, finished=false, _hangupClose=false, _headerSent=false, $ref=$["socket"], $ref=$["socket"], _header=null, x-powered-by=Express, x-powered-by=X-Powered-By, $ref=$, , writeHead=function writeHead(statusCode) {
+    // set headers from arguments
+    var args = setWriteHeadHeaders.apply(this, arguments);
+
+    // fire listener
+    if (!fired) {
+      fired = true
+      listener.call(this)
+
+      // pass-along an updated status code
+      if (typeof args[0] === 'number' && this.statusCode !== args[0]) {
+        args[0] = this.statusCode
+        args.length = 1
+      }
+    }
+
+    prevWriteHead.apply(this, args);
+  }, end=function end(chunk, encoding) {
+      if (ended) {
+        return false;
+      }
+
+      ended = true;
+
+      var ret;
+      var sync = true;
+
+      function writeend() {
+        if (sync) {
+          ret = _end.call(res, chunk, encoding);
+          sync = false;
+          return;
+        }
+
+        _end.call(res);
+      }
+
+      function writetop() {
+        if (!sync) {
+          return ret;
+        }
+
+        if (chunk == null) {
+          ret = true;
+          return ret;
+        }
+
+        var contentLength = Number(res.getHeader('Content-Length'));
+
+        if (!isNaN(contentLength) && contentLength > 0) {
+          // measure chunk
+          chunk = !Buffer.isBuffer(chunk)
+            ? new Buffer(chunk, encoding)
+            : chunk;
+          encoding = undefined;
+
+          if (chunk.length !== 0) {
+            debug('split response');
+            ret = _write.call(res, chunk.slice(0, chunk.length - 1));
+            chunk = chunk.slice(chunk.length - 1, chunk.length);
+            return ret;
+          }
+        }
+
+        ret = _write.call(res, chunk, encoding);
+        sync = false;
+
+        return ret;
+      }
+
+      if (shouldDestroy(req)) {
+        // destroy session
+        debug('destroying');
+        store.destroy(req.sessionID, function ondestroy(err) {
+          if (err) {
+            defer(next, err);
+          }
+
+          debug('destroyed');
+          writeend();
+        });
+
+        return writetop();
+      }
+
+      // no session to save
+      if (!req.session) {
+        debug('no session');
+        return _end.call(res, chunk, encoding);
+      }
+
+      // touch session
+      req.session.touch();
+
+      if (shouldSave(req)) {
+        req.session.save(function onsave(err) {
+          if (err) {
+            defer(next, err);
+          }
+
+          writeend();
+        });
+
+        return writetop();
+      } else if (storeImplementsTouch && shouldTouch(req)) {
+        // store implements touch method
+        debug('touching');
+        store.touch(req.sessionID, req.session, function ontouch(err) {
+          if (err) {
+            defer(next, err);
+          }
+
+          debug('touched');
+          writeend();
+        });
+
+        return writetop();
+      }
+
+      return _end.call(res, chunk, encoding);
+    }, $ref=$["socket"], httpVersionMajor=1, httpVersionMinor=1, httpVersion=1.1, complete=true, host=localhost:8081, connection=keep-alive, cache-control=no-cache, user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36, postman-token=c34ce8af-0aec-796c-b769-a6851d9b486a, accept=*/*, accept-encoding=gzip, deflate, sdch, accept-language=en-US,en;q=0.8, cookie=session=j%3A%7B%22cookie%22%3A%7B%22originalMaxAge%22%3A899999%2C%22expires%22%3A%222015-09-30T22%3A17%3A10.271Z%22%2C%22httpOnly%22%3Atrue%2C%22path%22%3A%22%2F%22%7D%2C%22username%22%3A%22jadmin%22%2C%22sessionId%22%3A%22jadmin1443650530311%22%7D; connect.sid=s%3A99BoB74FSEG1D5J28fHRhk2sOKQImx-g.WJfPQ3tNmiHJ4cwL7bdqF8%2FjUaEFjj3QY7FKa1Q9TVM, rawHeaders=[Host, localhost:8081, Connection, keep-alive, Cache-Control, no-cache, User-Agent, Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36, Postman-Token, c34ce8af-0aec-796c-b769-a6851d9b486a, Accept, */*, Accept-Encoding, gzip, deflate, sdch, Accept-Language, en-US,en;q=0.8, Cookie, session=j%3A%7B%22cookie%22%3A%7B%22originalMaxAge%22%3A899999%2C%22expires%22%3A%222015-09-30T22%3A17%3A10.271Z%22%2C%22httpOnly%22%3Atrue%2C%22path%22%3A%22%2F%22%7D%2C%22username%22%3A%22jadmin%22%2C%22sessionId%22%3A%22jadmin1443650530311%22%7D; connect.sid=s%3A99BoB74FSEG1D5J28fHRhk2sOKQImx-g.WJfPQ3tNmiHJ4cwL7bdqF8%2FjUaEFjj3QY7FKa1Q9TVM], , rawTrailers=[], _pendings=[], _pendingIndex=0, upgrade=false, url=/home, method=GET, statusCode=null, statusMessage=null, $ref=$["socket"], _consuming=false, _dumped=false, next=function next(err) {
+    var layerError = err === 'route'
+      ? null
+      : err;
+
+    // remove added slash
+    if (slashAdded) {
+      req.url = req.url.substr(1);
+      slashAdded = false;
+    }
+
+    // restore altered req.url
+    if (removed.length !== 0) {
+      req.baseUrl = parentUrl;
+      req.url = protohost + removed + req.url.substr(protohost.length);
+      removed = '';
+    }
+
+    // no more matching layers
+    if (idx >= stack.length) {
+      setImmediate(done, layerError);
+      return;
+    }
+
+    // get pathname of request
+    var path = getPathname(req);
+
+    if (path == null) {
+      return done(layerError);
+    }
+
+    // find next matching layer
+    var layer;
+    var match;
+    var route;
+
+    while (match !== true && idx < stack.length) {
+      layer = stack[idx++];
+      match = matchLayer(layer, path);
+      route = layer.route;
+
+      if (typeof match !== 'boolean') {
+        // hold on to layerError
+        layerError = layerError || match;
+      }
+
+      if (match !== true) {
+        continue;
+      }
+
+      if (!route) {
+        // process non-route handlers normally
+        continue;
+      }
+
+      if (layerError) {
+        // routes do not match with a pending error
+        match = false;
+        continue;
+      }
+
+      var method = req.method;
+      var has_method = route._handles_method(method);
+
+      // build up automatic options response
+      if (!has_method && method === 'OPTIONS') {
+        appendMethods(options, route._options());
+      }
+
+      // don't even bother matching route
+      if (!has_method && method !== 'HEAD') {
+        match = false;
+        continue;
+      }
+    }
+
+    // no match
+    if (match !== true) {
+      return done(layerError);
+    }
+
+    // store route for dispatch on change
+    if (route) {
+      req.route = route;
+    }
+
+    // Capture one-time layer values
+    req.params = self.mergeParams
+      ? mergeParams(layer.params, parentParams)
+      : layer.params;
+    var layerPath = layer.path;
+
+    // this should be done for the layer
+    self.process_params(layer, paramcalled, req, res, function (err) {
+      if (err) {
+        return next(layerError || err);
+      }
+
+      if (route) {
+        return layer.handle_request(req, res, next);
+      }
+
+      trim_prefix(layer, layerError, layerPath, path);
+    });
+  }, baseUrl=, originalUrl=/home, protocol=null, slashes=null, auth=null, host=null, port=null, hostname=null, hash=null, search=null, query=null, pathname=/home, path=/home, href=/home, _raw=/home, , , $ref=$["socket"]["_httpMessage"], protocol=null, slashes=null, auth=null, host=null, port=null, hostname=null, hash=null, search=null, query=null, pathname=/home, path=/home, href=/home, _raw=/home, 99BoB74FSEG1D5J28fHRhk2sOKQImx-g={"cookie":{"originalMaxAge":899999,"expires":"2015-09-30T22:17:10.316Z","httpOnly":true,"path":"/"},"username":"jadmin","sessionId":"jadmin1443650530311","role":"admin"}, generate=function (req){
+    req.sessionID = generateId(req);
+    req.session = new Session(req);
+    req.session.cookie = new Cookie(cookie);
+  }, disconnect=function (){ storeReady = false; }, connect=function (){ storeReady = true; }, sessionID=99BoB74FSEG1D5J28fHRhk2sOKQImx-g, path=/, _expires=Wed Sep 30 2015 18:17:10 GMT-0400 (EDT), originalMaxAge=899999, httpOnly=true, username=jadmin, sessionId=jadmin1443650530311, role=admin, save=function save() {
+        debug('saving %s', this.id);
+        savedHash = hash(this);
+        _save.apply(this, arguments);
+      }, , path=/home, stack=[handle=function (request, response){
+		logger.debug(request);
+		if(request.session) {
+			logger.debug(request.cookies.session.username);
+		}
+		logger.info("Home page request!");
+		response.render('users.html',{'username':'egupta'});
+	}, name=<anonymous>, params=undefined, path=undefined, keys=[], , method=get], get=true
+2015-09-30T22:04:41.326Z - info: Server up and running on port 8081!
+2015-09-30T22:04:46.225Z - info: Login Request
+2015-09-30T22:04:46.226Z - debug: jadminadmin
+2015-09-30T22:04:46.227Z - debug: going to db login
+2015-09-30T22:04:46.245Z - debug: User found in db!
+2015-09-30T22:04:59.907Z - info: Home page request!
+2015-09-30T22:27:19.685Z - info: Server up and running on port 8081!
+2015-09-30T22:27:19.691Z - error: uncaughtException: listen EADDRINUSE date=Wed Sep 30 2015 18:27:19 GMT-0400 (EDT), pid=977, uid=501, gid=20, cwd=/Users/egupta/workspace/Scalable Systems/EDISS, execPath=/usr/local/bin/node, version=v0.12.7, argv=[/usr/local/bin/node, /Users/egupta/workspace/Scalable Systems/EDISS/server.js], rss=38502400, heapTotal=30578176, heapUsed=16477432, loadavg=[2.70751953125, 2.75244140625, 2.6005859375], uptime=50217, trace=[column=11, file=util.js, function=exports._errnoException, line=746, method=_errnoException, native=false, column=14, file=net.js, function=Server._listen2, line=1156, method=_listen2, native=false, column=10, file=net.js, function=listen, line=1182, method=null, native=false, column=5, file=net.js, function=Server.listen, line=1267, method=listen, native=false, column=24, file=Systems/EDISS/node_modules/express/lib/application.js, function=EventEmitter.listen (/Users/egupta/workspace/Scalable, line=617, method=listen (/Users/egupta/workspace/Scalable, native=false, column=5, file=Systems/EDISS/server.js, function=Object.<anonymous> (/Users/egupta/workspace/Scalable, line=65, method=<anonymous> (/Users/egupta/workspace/Scalable, native=false, column=26, file=module.js, function=Module._compile, line=460, method=_compile, native=false, column=10, file=module.js, function=Object.Module._extensions..js, line=478, method=Module._extensions..js, native=false, column=32, file=module.js, function=Module.load, line=355, method=load, native=false, column=12, file=module.js, function=Function.Module._load, line=310, method=Module._load, native=false], stack=[Error: listen EADDRINUSE,     at exports._errnoException (util.js:746:11),     at Server._listen2 (net.js:1156:14),     at listen (net.js:1182:10),     at Server.listen (net.js:1267:5),     at EventEmitter.listen (/Users/egupta/workspace/Scalable Systems/EDISS/node_modules/express/lib/application.js:617:24),     at Object.<anonymous> (/Users/egupta/workspace/Scalable Systems/EDISS/server.js:65:5),     at Module._compile (module.js:460:26),     at Object.Module._extensions..js (module.js:478:10),     at Module.load (module.js:355:32),     at Function.Module._load (module.js:310:12)]
+2015-09-30T22:27:33.285Z - info: Login Request
+2015-09-30T22:27:33.285Z - debug: jadminadmin
+2015-09-30T22:27:33.285Z - debug: going to db login
+2015-09-30T22:27:33.309Z - error: uncaughtException: Cannot read property 'length' of undefined date=Wed Sep 30 2015 18:27:33 GMT-0400 (EDT), pid=940, uid=501, gid=20, cwd=/Users/egupta/workspace/Scalable Systems/EDISS, execPath=/usr/local/bin/node, version=v0.12.7, argv=[/usr/local/bin/node, /Users/egupta/workspace/Scalable Systems/EDISS/server.js], rss=43769856, heapTotal=32630016, heapUsed=15538328, loadavg=[2.7529296875, 2.76318359375, 2.6064453125], uptime=50231, trace=[column=12, file=Systems/EDISS/app/routes.js, function=Query._callback (/Users/egupta/workspace/Scalable, line=300, method=_callback (/Users/egupta/workspace/Scalable, native=false, column=24, file=/Users/egupta/node_modules/mysql/lib/protocol/sequences/Sequence.js, function=Query.Sequence.end, line=96, method=Sequence.end, native=false, column=14, file=/Users/egupta/node_modules/mysql/lib/protocol/Protocol.js, function=Protocol.handleNetworkError, line=358, method=handleNetworkError, native=false, column=18, file=/Users/egupta/node_modules/mysql/lib/Connection.js, function=Connection._handleNetworkError, line=384, method=_handleNetworkError, native=false, column=17, file=events.js, function=Socket.emit, line=107, method=emit, native=false, column=14, file=net.js, function=null, line=459, method=null, native=false, column=11, file=node.js, function=process._tickCallback, line=355, method=_tickCallback, native=false], stack=[TypeError: Cannot read property 'length' of undefined,     at Query._callback (/Users/egupta/workspace/Scalable Systems/EDISS/app/routes.js:300:12),     at Query.Sequence.end (/Users/egupta/node_modules/mysql/lib/protocol/sequences/Sequence.js:96:24),     at Protocol.handleNetworkError (/Users/egupta/node_modules/mysql/lib/protocol/Protocol.js:358:14),     at Connection._handleNetworkError (/Users/egupta/node_modules/mysql/lib/Connection.js:384:18),     at Socket.emit (events.js:107:17),     at net.js:459:14,     at process._tickCallback (node.js:355:11)]
+2015-09-30T22:32:40.389Z - info: Server up and running on port 8081!
+2015-09-30T22:33:08.084Z - info: Login Request
+2015-09-30T22:33:08.085Z - debug: jadminadmin
+2015-09-30T22:33:08.085Z - debug: going to db login
+2015-09-30T22:33:08.102Z - debug: User found in db!
+2015-09-30T22:34:21.861Z - info: Server up and running on port 8081!
+2015-09-30T22:34:28.115Z - info: Login Request
+2015-09-30T22:34:28.119Z - debug: jadminadmin
+2015-09-30T22:34:28.120Z - debug: going to db login
+2015-09-30T22:34:28.185Z - debug: User found in db!
+2015-09-30T22:34:35.515Z - debug:  username=jadmin, sessionId=jadmin1443652468186, role=admin
+2015-09-30T22:34:35.515Z - info: Home page request!
+2015-09-30T22:41:09.442Z - info: Server up and running on port 8081!
+2015-09-30T22:41:18.009Z - info: Home page request!
+2015-09-30T22:41:18.619Z - info: Session check request!
+2015-09-30T22:41:19.992Z - info: Login page request!
+2015-09-30T22:41:32.038Z - info: Login Request
+2015-09-30T22:41:32.039Z - debug: jadminadmin
+2015-09-30T22:41:32.039Z - debug: going to db login
+2015-09-30T22:41:32.056Z - debug: User found in db!
+2015-09-30T22:41:32.122Z - debug:  username=jadmin, sessionId=jadmin1443652892056, role=admin
+2015-09-30T22:41:32.123Z - info: Home page request!
+2015-09-30T22:41:32.656Z - info: Session check request!
+2015-09-30T22:41:52.454Z - info: Home page request!
+2015-09-30T22:41:52.538Z - debug:  username=jadmin, sessionId=jadmin1443652892056, role=admin
+2015-09-30T22:41:52.539Z - info: Home page request!
+2015-09-30T22:41:54.089Z - info: Session check request!
+2015-09-30T22:42:01.992Z - info: Session check request!
+2015-09-30T22:42:02.366Z - info: Home page request!
+2015-09-30T22:42:02.919Z - info: Session check request!
+2015-09-30T22:43:06.681Z - info: Server up and running on port 8081!
+2015-09-30T22:43:11.361Z - info: Home page request!
+2015-09-30T22:43:11.828Z - info: Session check request!
+2015-09-30T22:43:16.043Z - info: Login page request!
+2015-09-30T22:43:21.747Z - info: Login Request
+2015-09-30T22:43:21.748Z - debug: jadminadmin
+2015-09-30T22:43:21.748Z - debug: going to db login
+2015-09-30T22:43:21.764Z - debug: User found in db!
+2015-09-30T22:43:21.865Z - debug:  username=jadmin, sessionId=jadmin1443653001764, role=admin
+2015-09-30T22:43:21.866Z - info: Home page request!
+2015-09-30T22:43:22.957Z - info: Session check request!
+2015-09-30T22:43:27.546Z - info: Home page request!
+2015-09-30T22:43:27.600Z - debug:  username=jadmin, sessionId=jadmin1443653001764, role=admin
+2015-09-30T22:43:27.602Z - info: Home page request!
+2015-09-30T22:43:28.102Z - info: Session check request!
+2015-09-30T22:43:33.436Z - info: Session check request!
+2015-09-30T22:43:33.482Z - info: Home page request!
+2015-09-30T22:43:33.976Z - info: Session check request!
+2015-09-30T22:43:35.881Z - info: Home page request!
+2015-09-30T22:43:36.234Z - info: Session check request!
+2015-09-30T22:43:37.700Z - info: Login page request!
+2015-09-30T22:43:42.940Z - info: Login Request
+2015-09-30T22:43:42.941Z - debug: hsmithsmith
+2015-09-30T22:43:42.941Z - debug: going to db login
+2015-09-30T22:43:42.955Z - debug: User found in db!
+2015-09-30T22:43:43.054Z - debug:  username=hsmith, sessionId=hsmith1443653022955, role=user
+2015-09-30T22:43:43.054Z - info: Home page request!
+2015-09-30T22:43:44.011Z - info: Session check request!
+2015-09-30T22:43:46.544Z - info: Session check request!
+2015-09-30T22:43:47.327Z - info: Session check request!
+2015-09-30T22:43:48.644Z - info: Home page request!
+2015-09-30T22:43:48.662Z - debug:  username=hsmith, sessionId=hsmith1443653022955, role=user
+2015-09-30T22:43:48.662Z - info: Home page request!
+2015-09-30T22:43:50.441Z - info: Session check request!
+2015-09-30T22:43:51.542Z - info: Session check request!
+2015-09-30T22:43:51.590Z - info: Home page request!
+2015-09-30T22:43:52.083Z - info: Session check request!
+2015-10-01T03:16:33.144Z - info: Server up and running on port 8081!
+2015-10-01T03:16:42.986Z - info: Home page request!
+2015-10-01T03:16:43.571Z - info: Session check request!
+2015-10-01T03:18:30.049Z - info: Server up and running on port 8081!
+2015-10-01T03:18:33.141Z - info: Home page request!
+2015-10-01T03:18:33.730Z - info: Session check request!
+2015-10-01T03:18:34.849Z - info: Home page request!
+2015-10-01T03:18:35.115Z - info: Home page request!
+2015-10-01T03:18:35.389Z - info: Session check request!
+2015-10-01T03:18:43.320Z - info: Login page request!
+2015-10-01T03:18:54.575Z - info: Login Request
+2015-10-01T03:18:54.575Z - debug: jadminadmin
+2015-10-01T03:18:54.575Z - debug: going to db login
+2015-10-01T03:18:54.597Z - debug: User found in db!
+2015-10-01T03:18:54.620Z - debug:  username=jadmin, sessionId=jadmin1443669534597, role=admin
+2015-10-01T03:18:54.621Z - info: Home page request!
+2015-10-01T03:18:56.452Z - info: Session check request!
+2015-10-01T03:18:59.072Z - info: Session check request!
+2015-10-01T03:18:59.446Z - info: Session check request!
+2015-10-01T03:19:06.707Z - info: update user!
+2015-10-01T03:19:06.741Z - error: uncaughtException: fname is not defined date=Wed Sep 30 2015 23:19:06 GMT-0400 (EDT), pid=1303, uid=501, gid=20, cwd=/Users/egupta/workspace/Scalable Systems/EDISS, execPath=/usr/local/bin/node, version=v0.12.7, argv=[/usr/local/bin/node, /Users/egupta/workspace/Scalable Systems/EDISS/server.js], rss=42848256, heapTotal=32617984, heapUsed=20821584, loadavg=[2.1328125, 2.22802734375, 2.30029296875], uptime=67722, trace=[column=8, file=Systems/EDISS/app/routes.js, function=Query._callback (/Users/egupta/workspace/Scalable, line=272, method=_callback (/Users/egupta/workspace/Scalable, native=false, column=24, file=/Users/egupta/node_modules/mysql/lib/protocol/sequences/Sequence.js, function=Query.Sequence.end, line=96, method=Sequence.end, native=false, column=8, file=/Users/egupta/node_modules/mysql/lib/protocol/sequences/Query.js, function=Query._handleFinalResultPacket, line=144, method=_handleFinalResultPacket, native=false, column=10, file=/Users/egupta/node_modules/mysql/lib/protocol/sequences/Query.js, function=Query.OkPacket, line=78, method=OkPacket, native=false, column=23, file=/Users/egupta/node_modules/mysql/lib/protocol/Protocol.js, function=Protocol._parsePacket, line=274, method=_parsePacket, native=false, column=12, file=/Users/egupta/node_modules/mysql/lib/protocol/Parser.js, function=Parser.write, line=77, method=write, native=false, column=16, file=/Users/egupta/node_modules/mysql/lib/protocol/Protocol.js, function=Protocol.write, line=39, method=write, native=false, column=28, file=/Users/egupta/node_modules/mysql/lib/Connection.js, function=, line=96, method=null, native=false, column=17, file=events.js, function=Socket.emit, line=107, method=emit, native=false, column=16, file=_stream_readable.js, function=readableAddChunk, line=163, method=null, native=false], stack=[ReferenceError: fname is not defined,     at Query._callback (/Users/egupta/workspace/Scalable Systems/EDISS/app/routes.js:272:8),     at Query.Sequence.end (/Users/egupta/node_modules/mysql/lib/protocol/sequences/Sequence.js:96:24),     at Query._handleFinalResultPacket (/Users/egupta/node_modules/mysql/lib/protocol/sequences/Query.js:144:8),     at Query.OkPacket (/Users/egupta/node_modules/mysql/lib/protocol/sequences/Query.js:78:10),     at Protocol._parsePacket (/Users/egupta/node_modules/mysql/lib/protocol/Protocol.js:274:23),     at Parser.write (/Users/egupta/node_modules/mysql/lib/protocol/Parser.js:77:12),     at Protocol.write (/Users/egupta/node_modules/mysql/lib/protocol/Protocol.js:39:16),     at Socket.<anonymous> (/Users/egupta/node_modules/mysql/lib/Connection.js:96:28),     at Socket.emit (events.js:107:17),     at readableAddChunk (_stream_readable.js:163:16)]
+2015-10-01T03:20:39.377Z - info: Server up and running on port 8081!
+2015-10-01T03:20:44.748Z - info: Home page request!
+2015-10-01T03:20:44.922Z - debug:  username=jadmin, sessionId=jadmin1443669534597, role=admin
+2015-10-01T03:20:44.925Z - info: Home page request!
+2015-10-01T03:20:45.278Z - info: Session check request!
+2015-10-01T03:20:48.123Z - info: Session check request!
+2015-10-01T03:20:48.409Z - info: Session check request!
+2015-10-01T03:20:53.922Z - info: update user!
+2015-10-01T03:20:56.203Z - info: Home page request!
+2015-10-01T03:20:56.213Z - debug:  username=jadmin, sessionId=jadmin1443669534597, role=admin
+2015-10-01T03:20:56.213Z - info: Home page request!
+2015-10-01T03:20:56.523Z - info: Session check request!
+2015-10-01T03:21:19.766Z - info: Home page request!
+2015-10-01T03:21:19.814Z - debug:  username=jadmin, sessionId=jadmin1443669534597, role=admin
+2015-10-01T03:21:19.815Z - info: Home page request!
+2015-10-01T03:21:21.158Z - info: Session check request!
+2015-10-01T03:26:11.401Z - info: Server up and running on port 8081!
+2015-10-01T03:26:17.423Z - debug:  username=jadmin, sessionId=jadmin1443669534597, role=admin
+2015-10-01T03:26:17.424Z - info: Home page request!
+2015-10-01T03:26:17.860Z - info: Session check request!
+2015-10-01T03:29:50.500Z - info: Server up and running on port 8081!
+2015-10-01T03:29:58.703Z - debug:  username=jadmin, sessionId=jadmin1443669534597, role=admin
+2015-10-01T03:29:58.704Z - info: Home page request!
+2015-10-01T03:30:00.676Z - info: Session check request!
+2015-10-01T03:30:51.328Z - info: Server up and running on port 8081!
+2015-10-01T03:30:56.697Z - debug:  username=jadmin, sessionId=jadmin1443669534597, role=admin
+2015-10-01T03:30:56.698Z - info: Home page request!
+2015-10-01T03:30:57.139Z - info: Session check request!
+2015-10-01T03:32:03.004Z - info: Server up and running on port 8081!
+2015-10-01T03:32:07.811Z - debug:  username=jadmin, sessionId=jadmin1443669534597, role=admin
+2015-10-01T03:32:07.812Z - info: Home page request!
+2015-10-01T03:32:08.190Z - info: Session check request!
+2015-10-01T03:33:35.438Z - info: Server up and running on port 8081!
+2015-10-01T03:33:37.190Z - debug:  username=jadmin, sessionId=jadmin1443669534597, role=admin
+2015-10-01T03:33:37.191Z - info: Home page request!
+2015-10-01T03:33:37.208Z - debug:  username=jadmin, sessionId=jadmin1443669534597, role=admin
+2015-10-01T03:33:37.209Z - info: Home page request!
+2015-10-01T03:33:37.588Z - info: Session check request!
+2015-10-01T03:34:03.008Z - info: Home page request!
+2015-10-01T03:34:03.445Z - debug:  username=jadmin, sessionId=jadmin1443669534597, role=admin
+2015-10-01T03:34:03.446Z - info: Home page request!
+2015-10-01T03:34:03.870Z - info: Session check request!

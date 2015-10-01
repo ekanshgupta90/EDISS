@@ -13,8 +13,9 @@ var express = require('express');
 var logger = require('winston');
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
+//var cookieParser = require('cookie-parser');
+//var session = require('express-session');
+var session = require("client-sessions");
 
 var app= express();
 
@@ -27,7 +28,7 @@ var port = 8081;
 
 /**
  * Loading mysql db connection configurations
- * @param mysql
+ * @param mysqlpat
  */
 var connection = require('./config/dbConnection')(mysql);
 
@@ -48,6 +49,7 @@ app.set('views', __dirname + '/public');
  * Setting the web contain viewer to EJS
  */
 //app.set('view engine', 'ejs');
+
 
 /**
  * Setting Routes for all the rest request to the page
