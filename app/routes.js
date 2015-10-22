@@ -107,7 +107,7 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 		if (request.query.fname) {
 			query1 = "SELECT * FROM User_Details WHERE fName like ?";
 			key.push('%'+request.query.fname+'%');
-		} else if (request.query.fname) {
+		} else if (request.query.lname) {
 			query1 = "SELECT * FROM User_Details WHERE lName like ?";
 			key.push('%'+request.query.lname+'%');
 		} else {
@@ -347,34 +347,37 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 		var query1 = "";
 		var par = [];
 		if (category) {
-			console.log(category);
-			query1 = "SELECT * FROM category_master WHERE category_name like ? or category_parent like ?";
-			par.push('%',category,'%');
+			logger.info(category);
+			query1 = "SELECT distinct(id) FROM map WHERE tag like ? limit 100";
 			par.push('%',category,'%');
 			connection.query(query1, par, function (err, rows, fields) {
 				if (!err) {
+					logger.info(rows);
 					if (rows.length > 0) {
-						console.log(rows);
-						var cat_id = '%';
-						cat_id += rows[0].category_id + '%';
-						console.log(cat_id);
+						var id_str = '';
+						for (var i = 0; i < rows.length; i++) {
+							if (i+1 !== rows.length)
+								id_str += rows[i].id + ',';
+							else
+								id_str += rows[i].id;
+						}
+						logger.info(id_str);
 						if (keyword) {
-							console.log('in keyword search');
-							query1 = "SELECT * FROM product WHERE title like ? AND category_key like ?";
+							logger.debug('in keyword search');
+							query1 = "SELECT * FROM product WHERE title like ? AND id in (" + id_str + ") limit 100";
 							par = new Array();
 							par.push('%'+keyword+'%');
-							par.push(cat_id);
-							connection.query(query1,par,function(err,rows,fields){
+							connection.query(query1,par,function(err,rows1,fields){
 								if(!err) {
-									if (rows.length > 0) {
+									if (rows1.length > 0) {
+										logger.info(rows1);
 										var usersArray = new Array();
-										for (var i = 0; i < rows.length; i++) {
+										for (var i = 0; i < rows1.length; i++) {
 											var product = {
-													id : rows[i].id,
-													title : rows[i].title,
-													asin : rows[i].asin,
-													groups : rows[i].groups,
-													parent : rows[i].parent_id
+													id : rows1[i].id,
+													title : rows1[i].title,
+													asin : rows1[i].asin,
+													groups : rows1[i].group
 											};
 											usersArray.push(product);
 										}
@@ -386,22 +389,19 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 								}
 							});
 						} else {
-							console.log(cat_id);
-							query1 = "SELECT * FROM product WHERE category_key like ?";
-							par = new Array();
-							par.push('%'+cat_id+'%');
-							connection.query(query1,par,function(err,rows,fields){
+							
+							query1 = "SELECT * FROM product WHERE id in (" + id_str + ") limit 100";
+							
+							connection.query(query1,function(err,rows1,fields){
 								if(!err) {
-									console.log(cat_id);
-									if (rows.length > 0) {
+									if (rows1.length > 0) {
 										var usersArray = new Array();
-										for (var i = 0; i < rows.length; i++) {
+										for (var i = 0; i < rows1.length; i++) {
 											var product = {
-													id : rows[i].id,
-													title : rows[i].title,
-													asin : rows[i].asin,
-													groups : rows[i].groups,
-													parent : rows[i].parent_id
+													id : rows1[i].id,
+													title : rows1[i].title,
+													asin : rows1[i].asin,
+													groups : rows1[i].group
 											};
 											usersArray.push(product);
 										}
@@ -425,10 +425,10 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 			});
 		} else {
 			if (keyword) {
-				query1 = "SELECT * FROM product WHERE title like ?";
+				query1 = "SELECT * FROM product WHERE title like ? limit 100";
 				par.push('%'+keyword+'%');
 			} else if (productId){
-				query1 = "SELECT * FROM product WHERE id = ?";
+				query1 = "SELECT * FROM product WHERE id = ? limit 100";
 				par.push (productId);
 			} 
 			connection.query(query1,par, function (err, rows, fields) {
@@ -440,8 +440,7 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 									id : rows[i].id,
 									title : rows[i].title,
 									asin : rows[i].asin,
-									groups : rows[i].groups,
-									parent : rows[i].parent_id
+									groups : rows[i].group
 							};
 							usersArray.push(product);
 						}

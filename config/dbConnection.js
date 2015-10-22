@@ -6,10 +6,10 @@
 
 module.exports = function (mysql) {
 	var connection = mysql.createConnection({
-		host: 'ediss-db.c47a5hmpj9xh.us-east-1.rds.amazonaws.com',
-		user:'',
-		password: '',
-		database: ''
+		host: '52.91.115.88',
+		user:'egupta',
+		password: 'abcd1234',
+		database: 'EDISS_DB'
 	});
 	return connection;	
 };
