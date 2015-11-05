@@ -5,11 +5,13 @@
  */
 
 module.exports = function (mysql) {
-	var connection = mysql.createConnection({
-		host: '52.91.115.88',
+	var connection = mysql.createPool({
+		connectionLimit : 200,
+		host: 'db-load-balancer-1505674378.us-east-1.elb.amazonaws.com',
 		user:'egupta',
 		password: 'abcd1234',
-		database: 'EDISS_DB'
+		database: 'EDISS_DB',
+		multipleStatements: true
 	});
 	return connection;	
 };

@@ -41,7 +41,7 @@ require('./config/logConnection')(logger);
 
 
 //Serve static files
-//app.set('view options', {layout:false});
+//app.set('view options', {layout:false});	
 app.engine('html', require('ejs').renderFile);
 app.set('views', __dirname + '/public');
 //app.use(express.static(path.join(__dirname,'public')));
