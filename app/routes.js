@@ -6,14 +6,10 @@
 
 module.exports = function (app,connection,logger, bodyParser, session) {
 
-	//connection.connect();
 	
 	/**
-	 * 
+	 * Client side session creation. 
 	 */
-	//app.use(cookieParser);
-	//app.use(session({secret:'helpme0000', cookie:{maxAge:15*60*1000}}));
-
 	app.use(session({
 		  cookieName: 'mySession', // cookie name dictates the key name added to the request object
 		  secret: 'helpme0000', // should be a large unguessable string
@@ -27,40 +23,51 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 	app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(bodyParser.json());
 
-	
+	/**
+	 * GET - / -> home directory
+	 */
 	app.get('/', function (request, response){
-		logger.info("Home page request!");
+		//logger.info("Home page request!");
 		var sess = request.mySession;
 		
 		if (sess.username) {
 			response.redirect('/home');
+		} else {
+			response.render('users.html',{message:""});
 		}
-		response.render('users.html',{message:""});
 	});
 	
+	/**
+	 * GET - /loginPage -> Login Page for the application
+	 */
 	app.get('/loginPage', function (request, response){
-		logger.info("Login page request!");
+		//logger.info("Login page request!");
 		
 		var sess = request.mySession;
 		
 		if (sess.username) {
 			response.redirect('/home');
+		} else {
+			response.render('login.html');
 		}
-		response.render('login.html');
 	});
 	
+	/**
+	 * GET - /register -> Registering a new user.
+	 */
 	app.get('/register', function (request, response){
-		logger.info("Signup page request!");
+		//logger.info("Signup page request!");
 		var sess = request.mySession;
 		
 		if (sess.username) {
 			response.redirect('/home');
+		} else {
+			response.render('signup.html',{status:'',message:"account has been registered"});
 		}
-		response.render('signup.html',{status:'',message:"Your account has been registered"});
 	});
 	
 	app.get('/getSession', function (request, response){
-		logger.info("Session check request!");
+		//logger.info("Session check request!");
 		var sess = request.mySession;
 		
 		if (sess.username) {
@@ -71,6 +78,9 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 		
 	});
 	
+	/** Needs to be post not get
+	 * @author egupta
+	 * 
 	app.get('/logout', function (request, response){
 		logger.info("Session check request!");
 		var sess = request.mySession;
@@ -80,16 +90,42 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 			sess.role = '';
 			sess.sessionId = '';
 			response.cookie('mySession', sess)
-			response.redirect('/');
+			response.json({message:"You have been logged out"});
 		} else {
 			response.redirect('/');
+			response.json({message:"You are not currently logged in"});
+		}
+		
+	});
+	*/
+	
+	/**
+	 * POST - /logout -> Logs out user session
+	 */
+	app.post('/logout', function (request, response){
+		logger.info("Logout Action");
+		var sess = request.mySession;
+		
+		if (sess.username) {
+			sess.username = '';
+			sess.role = '';
+			sess.sessionId = '';
+			response.cookie('mySession', sess)
+			response.json({message:"You have been logged out"});
+		} else {
+			//response.redirect('/');
+			response.json({message:"You are not currently logged in"});
 		}
 		
 	});
 	
+	/**
+	 * GET - /viewUsersPage -> UI Page request for Users  
+	 */
 	app.get('/viewUsersPage', function (request, response) {
+		//logger.info("Logout Action");
 		var sess = request.mySession;
-		console.log(sess.username + sess.role);
+		logger.debug(sess.username + sess.role);
 		if(!sess.username || sess.role !== 'admin') {
 			response.redirect('/');
 		}
@@ -97,58 +133,57 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 	});
 	
 	app.get('/viewUsers', function (request, response) {
+		logger.info("Admin Users");
 		var sess = request.mySession;
 		if(!sess.username && sess.role !== admin) {
 			response.redirect('/');
-		}
-		
-		console.log(request.query.search);
-		var query1 = "", key = [];
-		if (request.query.fname) {
-			query1 = "SELECT * FROM User_Details WHERE fName like ?";
-			key.push('%'+request.query.fname+'%');
-		} else if (request.query.lname) {
-			query1 = "SELECT * FROM User_Details WHERE lName like ?";
-			key.push('%'+request.query.lname+'%');
 		} else {
-			response.json({user_list:[]});
-		}
-		connection.getConnection(function(err,conn){
-			if (err) {
-				logger.error (err);
+			logger.debug(request.query.search);
+			var query1 = "", key = [];
+			if (request.query.fname) {
+				query1 = "SELECT * FROM User_Details WHERE fName like ?";
+				key.push('%'+request.query.fname+'%');
+			} else if (request.query.lname) {
+				query1 = "SELECT * FROM User_Details WHERE lName like ?";
+				key.push('%'+request.query.lname+'%');
+			} else {
 				response.json({user_list:[]});
 			}
-			conn.query(query1,key, function (err, rows, fields) {
-				if (!err) {
-					if (rows.length > 0) {
-						var usersArray = new Array();
-						for (var i = 0; i < rows.length; i++) {
-							var user = {
-									fName : rows[i].fName,
-									lName : rows[i].lName,
-									address : rows[i].address,
-									city : rows[i].city,
-									state : rows[i].state,
-									zip : rows[i].zip,
-									email: rows[i].email,
-									uName: rows[i].uName
-							};
-							usersArray.push(user);
-						}
-						conn.release();
-						response.json({user_list:usersArray});
-					} else {
-						conn.release();
-						response.json({user_list:[]});
-					}
+			connection.getConnection(function(err,conn){
+				if (err) {
+					logger.error(err);
+					response.json({user_list:[]});
 				}
+				conn.query(query1,key, function (err, rows, fields) {
+					conn.release();
+					if (!err) {
+						if (rows.length > 0) {
+							var usersArray = new Array();
+							for (var i = 0; i < rows.length; i++) {
+								var user = {
+										fName : rows[i].fName,
+										lName : rows[i].lName,
+										address : rows[i].address,
+										city : rows[i].city,
+										state : rows[i].state,
+										zip : rows[i].zip,
+										email: rows[i].email,
+										uName: rows[i].uName
+								};
+								usersArray.push(user);
+							}
+							response.json({user_list:usersArray});
+						} else {
+							response.json({user_list:[]});
+						}
+					}
+				});
 			});
-		});
-		
+		}
 	});
 	
 	app.get('/profilePage', function (request, response){
-		logger.info("Session check request!");
+		//logger.info("Session check request!");
 		var sess = request.mySession;
 		
 		if (sess.username) {
@@ -160,9 +195,9 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 	});
 	
 	app.get('/profile', function (request, response){
-		logger.info("Session check request!");
+		logger.info("Profile Page!");
 		var sess = request.mySession;
-		console.log(sess.username);
+		logger.debug(sess.username);
 		if (sess.username) {
 			connection.getConnection(function(err,conn){
 				if (err) {
@@ -170,6 +205,7 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 					response.json({});
 				}
 				conn.query('SELECT * FROM User_Details WHERE uName = ?',[sess.username],function (err,rows,field) {
+					conn.release();
 					if(!err) {
 						if (rows.length > 0) {
 							var data = {
@@ -182,14 +218,14 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 									email: rows[0].email,
 									uName: rows[0].uName
 							};
-							conn.release();
+							
 							response.json(data);
 						} else {
-							conn.release();
+							
 							response.redirect('error.html');
 						}
 					} else {
-						conn.release();
+						
 						response.redirect('/');
 					}
 				});
@@ -210,124 +246,107 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 	});
 	
 	app.post('/registerUser', function (request, response) {
-		logger.info("New user!");
+		logger.info("Register User -" + request.body.email);
 		var success = true;
 		connection.getConnection(function(err,conn){
 			if(err) {
 				logger.error(err);
-				response.json({'status' : 'f', 'message' : 'There was a problem with your registration'});
-			}
-			
-			conn.query("INSERT INTO User_Details (fName,lName,address,city,state,zip,email,uName) values (?,?,?,?,?,?,?,?)",
-					[request.body.fname, request.body.lname, request.body.address, request.body.city, request.body.state, request.body.zip, 
-					request.body.email, request.body.username],function (error, rows, fields) {
-				if (!error) {
-					conn.query("INSERT INTO Users (uName,password,role) values (?,?,?)",[request.body.username, request.body.password,'user'], function (err1,rows1,field1) {
-						
-						if (!err1) {
-							conn.release();
-							response.json({'status' : 's', 'message' : 'Your account has been registered'});
+				response.json({'status' : 'f', 'message' : 'there was a problem with your registration'});
+			} else {
+				conn.query("select * from User_Details where email = ?",[request.body.email], function (error, rows, fields) {
+					if (!error) {
+						if (!(rows.length > 0)) {
+							conn.query("INSERT INTO User_Details (fName,lName,address,city,state,zip,email,uName) values (?,?,?,?,?,?,?,?); " +
+									"INSERT INTO Users (uName,password,role) values (?,?,?)",
+									[request.body.fname, request.body.lname, request.body.address, request.body.city, request.body.state, request.body.zip, 
+									request.body.email, request.body.username,request.body.username, request.body.password,'user'],
+									function (error, rows, fields) {
+								conn.release();
+								if (!error) {
+									logger.info("User Created - " + request.body.username);
+									response.json({'status' : 's', 'message' : 'account has been registered'});
+								} else {
+									logger.error(error);
+									success = false;
+									response.json({'status' : 'f', 'message' : 'there was a problem with your registration'});
+								}
+							});
 						} else {
 							conn.release();
-							response.json({'status' : 'f', 'message' : 'There was a problem with your registration'});
+							logger.info("Duplicate User - " + request.body.username);
+							success = false;
+							response.json({'status' : 'f', 'message' : 'there was a problem with your registration'});
 						}
-					});
-				} else {
-					logger.error(error);
-					success = false;
-					conn.release();
-					response.json({'status' : 'f', 'message' : 'There was a problem with your registration'});
-				}
-			});
+					} else {
+						conn.release();
+						logger.error(error);
+						success = false;
+						response.json({'status' : 'f', 'message' : 'there was a problem with your registration'});
+					}
+				});
+			}
 		});
-		
-		
 	});
 	
 	app.post('/updateInfo', function (request, response) {
-		logger.info("update user!");
+		logger.info("Update user ");
 		var sess = request.mySession;
 		
 		if (!sess.username) {
 			response.redirect('/');
-		}
-		var success = true;
-		var query1 = '',mess = [];
-		if (request.body.password) {
-			query1 = 'Update Users set password = ? where uName = ?';
-			mess.push(request.body.password);
-			mess.push(request.body.username);
+		} else {
+			logger.info("Update user - " + request.body.email);
+			var success = true;
+			var query1 = '', mess = [];
 			
-		} else {
-			query1 = 'select * from Users where uName = ?';
-			mess.push(request.body.username);
-		}
-		if (request.body.fname === null) {
-			fname = '';
-		} else {
-			fname = request.body.fname;
-		} 
-		if (request.body.lname === null) {
-			lname = '';
-		} else {
-			lname = request.body.lname;
-		}
-		if (request.body.address === null) {
-			address = '';
-		} else {
-			address = request.body.address;
-		}
-		if (request.body.city === null) {
-			city = '';
-		} else {
-			city = request.body.city;
-		}
-		if (request.body.zip === null) {
-			zip = '';
-		} else {
-			zip = request.body.zip;
-		}
-		if (request.body.state === null) {
-			state = '';
-		} else {
-			state = request.body.state;
-		}
-		if (request.body.email === null) {
-			email = '';
-		} else {
-			email = request.body.email;
-		}
-		connection.getConnection(function(err,conn){
-			if(err) {
-				logger.error(err);
-				response.json({'status' : 'f', 'message' : 'There was a problem with your updation'});
+			if (!request.body.fname) {
+				fname = '';
+			} else {
+				fname = request.body.fname;
+			} 
+			if (!request.body.lname) {
+				lname = '';
+			} else {
+				lname = request.body.lname;
 			}
-			connection.query(query1,mess,function (error, rows, fields) {
-				
-				if (!error) {
-					connection.query("Update User_Details set fName = ?,lName = ?,address = ?,city = ?,state = ?,zip = ?,email = ? where uName = ?",
-							[fname, lname, address, city, state, zip, 
-							email, request.body.username], function (err1,rows1,field1) {
+			if (!request.body.address) {
+				address = '';
+			} else {
+				address = request.body.address;
+			}
+			if (!request.body.city) {
+				city = '';
+			} else {
+				city = request.body.city;
+			}
+			if (!request.body.state) {
+				state = '';
+			} else {
+				state = request.body.state;
+			}
+			if (!request.body.email) {
+				email = '';
+			} else {
+				email = request.body.email;
+			}
+			connection.getConnection(function(err,conn){
+				if(err) {
+					logger.error(err);
+					response.json({'status' : 'f', 'message' : 'Connection Error!'});
+				} else {
+					conn.query("Update User_Details set fName = ?,lName = ?,address = ?,city = ?,state = ?, uName = ? where email = ?",
+							[fname, lname, address, city, state, 
+							 request.body.username,request.body.email], function (err1,rows1,field1) {
+						conn.release();
 						if (!err1) {
-							conn.release();
-							response.json({'status' : 's', 'message' : 'Your account has been updated'});
+							response.json({'status' : 's', 'message' : 'Your information has been updated'});
 						} else {
-							conn.release();
-							console.log(err1);
+							logger.debug(err1);
 							response.json({'status' : 'f', 'message' : 'There was a problem with your updation'});
 						}
 					});
-				} else {
-					conn.release();
-					logger.error(error);
-					success = false;
-					response.json({'status' : 'f', 'message' : 'There was a problem with your updation'});
-					
-				}
-			});
-		});
-		
-		
+			}});
+		}
 	});
 	
 	app.get('/healthCheck', function(request,response) {
@@ -336,9 +355,7 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 	});
 
 	app.post('/login', function (request, response) {
-		
-		
-		logger.info("Login Request");
+		logger.info("User Login");
 		var sess = request.mySession;
 		logger.debug(request.body.username + request.body.password);
 		
@@ -351,7 +368,7 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 			}
 			
 			conn.query("SELECT * FROM Users WHERE uName = ? AND password = ?",[request.body.username,request.body.password], function (error, rows, fields) {
-				
+				conn.release();
 				if (rows.length > 0) {
 					logger.debug('User found in db!');
 					sess.username = request.body.username;
@@ -362,16 +379,13 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 					if (rows[0].role === 'admin') {
 						sess.role = 'admin';
 						response.cookie('mySession', sess);
-						conn.release();
 						response.json({status:'s',username:request.body.username,err_message:"",sessionID:sess.sessionId,menu:['search','update_product','view_user']});
 					} else {
-						conn.release();
 						sess.role = 'user';
 						response.cookie('mySession', sess);
-						response.json({status:'s',username:request.body.username,err_message:"",sessionID:sess.sessionId,menu:['search']});
+						response.json({status:'s',username:request.body.username,err_message:"",sessionID:sess.sessionId,menu:['search','getProducts']});
 					}
 				} else {
-					conn.release();
 					response.json({status:'f',username:'',err_message:"Username and password combination is incorrect",sessionId:"",menu:[]});
 				}
 			});
@@ -381,21 +395,21 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 	});
 	
 	app.get('/getProducts', function (request, response) {
-		console.log(request.query.search +request.query.param);
+		logger.info("Get Products");
 		var productId = null;
 		if (request.query.productId) {
 			 productId = request.query.productId;
-			 console.log(productId);
+			 logger.debug(productId);
 		}
 		var keyword = null;
 		if (request.query.keyword) {
 			 keyword = request.query.keyword;
-			 console.log(keyword);
+			 logger.debug(keyword);
 		}
 		var category = null;
 		if (request.query.category) {
 			 category = request.query.category;
-			 console.log(category);
+			 logger.debug(category);
 		}
 		var query1 = "";
 		var par = [];
@@ -410,6 +424,7 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 				par.push('%',category,'%');
 				
 				conn.query(query1, par, function (err, rows, fields) {
+					conn.release();
 					if (!err) {
 						logger.info(rows);
 						if (rows.length > 0) {
@@ -440,12 +455,12 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 												};
 												usersArray.push(product);
 											}
-											conn.release();
+											
 											response.json({product_list:usersArray});
 										}
 									} else {
 										logger.error(err);
-										conn.release();
+										
 										response.json({product_list:[]});
 									}
 								});
@@ -454,6 +469,7 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 								query1 = "SELECT * FROM product WHERE id in (" + id_str + ") limit 100";
 								
 								conn.query(query1,function(err,rows1,fields){
+									conn.release();
 									if(!err) {
 										if (rows1.length > 0) {
 											var usersArray = new Array();
@@ -466,26 +482,26 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 												};
 												usersArray.push(product);
 											}
-											conn.release();
+											
 											response.json({product_list:usersArray});
 										} else {
-											conn.release();
+											
 											response.json({product_list:[]});
 										}
 									} else {
 										logger.error(err);
-										conn.release();
+										
 										response.json({product_list:[]});
 									}
 								});
 							}
 						} else {
-							conn.release();
+							
 							response.json({product_list:[]});
 						}
 					} else {
 						logger.error (err);
-						conn.release();
+						
 						response.json({product_list:[]});
 					}
 				});
@@ -498,6 +514,7 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 					par.push (productId);
 				} 
 				conn.query(query1,par, function (err, rows, fields) {
+					conn.release();
 					if (!err) {
 						if (rows.length > 0) {
 							var usersArray = new Array();
@@ -510,10 +527,10 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 								};
 								usersArray.push(product);
 							}
-							conn.release();
+						
 							response.json({product_list:usersArray});
 						} else {
-							conn.release();
+							
 							response.json({product_list:[]});
 						}
 					}
@@ -522,120 +539,128 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 		});
 	});
 	
-app.get('/modifyProductPage', function (request, response) {
-	var sess = request.mySession;
-	if(!sess.username || sess.role !== 'admin') {
-		response.redirect('/');
-	}
-	response.render('modifyProductPage.html');
-	
+	app.get('/modifyProductPage', function (request, response) {
+		logger.info("Modify Prodcut");
+		var sess = request.mySession;
+		if(!sess.username || sess.role !== 'admin') {
+			response.redirect('/');
+		} else {
+			response.render('modifyProductPage.html');
+		}
 	});
 	
 	app.post('/modifyProduct', function (request, response) {
 		var sess = request.mySession;
 		if(!sess.username || sess.role !== 'admin') {
 			response.redirect('/');
-		}
-		connection.getConnection(function(err,conn){
-			if (err) {
-				logger.error(err);
-				response.json({'status' : 'f', 'message' : 'There was a problem with your updation'});
-			}
-			conn.query("Update product set title = ? where id = ?",[request.body.title,request.body.id], function(err,rows,field){
-				if (!err) {
-					conn.release();
-					response.json({'status' : 's', 'message' : 'The product has been updated'});
-				} else {
-					conn.release();
-					console.log(err);
+		} else {
+			connection.getConnection(function(err,conn){
+				conn.release();
+				if (err) {
+					logger.error(err);
 					response.json({'status' : 'f', 'message' : 'There was a problem with your updation'});
 				}
+				conn.query("Update product set title = ? where id = ?",[request.body.title,request.body.id], function(err,rows,field){
+					if (!err) {
+						
+						response.json({'status' : 's', 'message' : 'The product has been updated'});
+					} else {
+						
+						logger.debug(err);
+						response.json({'status' : 'f', 'message' : 'There was a problem with your updation'});
+					}
+				});
 			});
-		});
+		}
 	});
 	
 	app.post('/buyProduct', function (request, response) {
+		logger.info("Buy Product");
 		var sess = request.mySession;
 		if(!sess.username) {
 			response.json({'status' : 'f', 'message' : '02 you need to log in prior to buying a product.'});
-		}
-		if (!request.body.productId) {
-			logger.error(err);
-			response.json({'status' : 'f', 'message' : 'Need to enter product id.'});
-		}
-		connection.getConnection(function(err,conn) {
-			if (err) {
+		} else {
+			if (!request.body.productId) {
 				logger.error(err);
-				response.json({'status' : 'f', 'message' : 'There was a problem with connection.'});
+				response.json({'status' : 'f', 'message' : 'Need to enter product id.'});
 			}
-			
-			conn.query("select * from product where id = ?",[request.body.productId], function(err,rows,field){
-				if (!err) {
-					
-					if (rows.length > 0) {
-						if (rows[0].available > 0) {
-							
-							conn.query("update product set available = available-1, sold =sold+1 where id = ?; insert into orders (productID, user) values (?,?)",[request.body.productId,request.body.productId, sess.username], function(err,rows,fields){
-								if (err) {
-									console.log(err);
-									response.json({'status' : 'f', 'message' : 'There was a problem with connection.'});
-								}
-								conn.release();
-								response.json({'status' : 's', 'message' : '01 the purchase has been made successfully'});
-								
-							});
-						} else {
-							conn.release();
-							response.json({'status' : 'f', 'message' : '03 that product is out of stock'});
-						}
-					} else {
-						
-						conn.release();
-						response.json({'status' : 'f', 'message' : 'Product not found in inventory!'});
-					}
-				} else {
-						
-					conn.release();
-					console.log(err);
-					response.json({'status' : 'f', 'message' : 'There was a problem with connection.'});
-				}
-			});
-		
-		});
-	});
-	
-	app.get('/getOrders',function(request, response) {
-		var sess = request.mySession;
-		if(!sess.username || sess.role !== 'admin') {
-			response.json({'status' : 'f', 'message' : '02 you need to log in prior to buying a product.'});
-		}
-		connection.getConnection (function (err, conn){
-			if (err) {
-				logger.error(err);
-				response.json({'status' : 'f', 'message' : 'There was a problem with connection.'});
-			}
-			conn.query("select productID, count(productID) count from orders group by productID order by count(productID) desc",function(err,rows,fields){
+			connection.getConnection(function(err,conn) {
 				if (err) {
-					conn.release();
 					logger.error(err);
 					response.json({'status' : 'f', 'message' : 'There was a problem with connection.'});
 				}
-				if (rows.length > 0) {
-					var orders = [];
-					for (var  i = 0; i < rows.length; i++) {
-						var productID = rows[i].productID;
-						var quantitySold = rows[i].count;
+				
+				conn.query("select * from product where id = ?",[request.body.productId], function(err,rows,field){
+					if (!err) {
 						
-						orders.push({'productId' : productID, 'quantitySold' : quantitySold});
+						if (rows.length > 0) {
+							if (rows[0].available > 0) {
+								
+								conn.query("update product set available = available-1, sold =sold+1 where id = ?; insert into orders (productID, user) values (?,?)",[request.body.productId,request.body.productId, sess.username], function(err,rows,fields){
+									conn.release();
+									if (err) {
+										logger.debug(err);
+										response.json({'status' : 'f', 'message' : 'There was a problem with connection.'});
+									}
+									
+									response.json({'status' : 's', 'message' : 'purchase has been made successfully'});
+									
+								});
+							} else {
+								
+								response.json({'status' : 'f', 'message' : 'product is out of stock'});
+							}
+						} else {
+							
+							
+							response.json({'status' : 'f', 'message' : 'Product not found in inventory!'});
+						}
+					} else {	
+						conn.release();
+						logger.debug(err);
+						response.json({'status' : 'f', 'message' : 'There was a problem with connection.'});
 					}
-					conn.release();
-					response.json({'status' : 's', 'orders' : orders});
-				} else {
-					conn.release();
-					response.json({'status' : 's', 'orders' : []});
-				}
+				});
+			
 			});
-		});
+		}
+		
+	});
+	
+	app.get('/getOrders',function(request, response) {
+		logger.info("Get Orders");
+		var sess = request.mySession;
+		if(!sess.username || sess.role !== 'admin') {
+			response.json({'status' : 'f', 'message' : 'you need to log in prior to buying a product.'});
+		} else {
+			connection.getConnection (function (err, conn){
+				if (err) {
+					logger.error(err);
+					response.json({'status' : 'f', 'message' : 'There was a problem with connection.'});
+				}
+				conn.query("select productID, count(productID) count from orders group by productID order by count(productID) desc",function(err,rows,fields){
+					conn.release();
+					if (err) {
+						logger.error(err);
+						response.json({'status' : 'f', 'message' : 'There was a problem with connection.'});
+					}
+					if (rows.length > 0) {
+						var orders = [];
+						for (var  i = 0; i < rows.length; i++) {
+							var productID = rows[i].productID;
+							var quantitySold = rows[i].count;
+							
+							orders.push({'productId' : productID, 'quantitySold' : quantitySold});
+						}
+						
+						response.json({'status' : 's', 'orders' : orders});
+					} else {
+						
+						response.json({'status' : 's', 'orders' : []});
+					}
+				});
+			});
+		}
 	});
 	
 

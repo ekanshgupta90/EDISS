@@ -8,7 +8,7 @@ module.exports = function (winston) {
 	winston.add (
 			winston.transports.File, {
 				filename : './logs/logger.log',
-				level : 'debug',
+				level : 'info',
 				json : false,
 				eol : '\n',
 				handleExceptions : true,

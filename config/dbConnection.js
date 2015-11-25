@@ -7,7 +7,7 @@
 module.exports = function (mysql) {
 	var connection = mysql.createPool({
 		connectionLimit : 200,
-		host: 'db-load-balancer-1505674378.us-east-1.elb.amazonaws.com',
+		host: '52.23.172.111',
 		user:'egupta',
 		password: 'abcd1234',
 		database: 'EDISS_DB',
