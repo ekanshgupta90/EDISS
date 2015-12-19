@@ -6,19 +6,56 @@
 
 
 /**
- * Loading dependencies for the application
+ * START - Loading dependencies for the application
+ */
+
+/**
+ * PATH - for reading system path
  */
 var path = require('path');
+
+/**
+ * EXPRESS - framework for using node
+ */
 var express = require('express');
+
+/**
+ * WINSTON - Logger for application
+ */
 var logger = require('winston');
+
+/**
+ * MYSQL - Mysql connection driver for node
+ */
 var mysql = require('mysql');
+
+/**
+ * BODY-PARSER - to parse JSON return body
+ */
 var bodyParser = require('body-parser');
-//var cookieParser = require('cookie-parser');
-//var session = require('express-session');
+
+/**
+ * CLIENT-SESSIONS - session management on the client side
+ */
 var session = require("client-sessions");
 
-var app= express();
+/**
+ * MEMCACHED - Cache for storing data
+ */
+//var memcached = require('memcached');
 
+/**
+ * END - Loading dependencies for the application
+ */
+
+/**
+ * START - Initialization of dependencies for the application
+ */
+
+/**
+ * APP - Loading application using express
+ */
+var app= express();
 
 
 /**
@@ -28,10 +65,13 @@ var port = 8081;
 
 /**
  * Loading mysql db connection configurations
- * @param mysqlpat
+ * @param mysql
  */
 var connection = require('./config/dbConnection')(mysql);
 
+var writeconn = require('./config/dbConnectionWrite')(mysql);
+
+//var cache = new memcached('ec2-52-90-171-88.compute-1.amazonaws.com:8088');
 
 /**
  * Loading the logger configurations
@@ -42,7 +82,16 @@ require('./config/logConnection')(logger);
 
 //Serve static files
 //app.set('view options', {layout:false});	
+
+//TODO
+/**
+ * Adding not checked yet
+ */
 app.engine('html', require('ejs').renderFile);
+
+/**
+ * Setting public directory
+ */
 app.set('views', __dirname + '/public');
 //app.use(express.static(path.join(__dirname,'public')));
 /** con
@@ -50,13 +99,15 @@ app.set('views', __dirname + '/public');
  */
 //app.set('view engine', 'ejs');
 
+/**
+ * END - Initialization of dependencies for the application
+ */
 
 /**
  * Setting Routes for all the rest request to the page
- * @param app, connection, logger
+ * @param app, connection, logger, bodyparser, session
  */
-require('./app/routes')(app,connection,logger,bodyParser,session);
-
+require('./app/routes')(app,connection,logger,bodyParser,session,writeconn);
 
 /**
  * Runs the server on specified port

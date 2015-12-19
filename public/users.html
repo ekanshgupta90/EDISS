@@ -75,10 +75,36 @@
     	
     	});*/
     	if (login) {
-    		window.open("\logout?sessionId="+sessionId,'_self','',true);
+    		var url = "/logout";
+ 			var callBack = "callbackLogout";
+    		$.ajax({
+    			type: 'post',
+    			url: url,
+    			data: {},
+    			dataType: 'json',
+    			contentType: "application/json", 
+    			processdata: true, //True or False
+    		    crossDomain: true,
+    			success: function(data, status) {
+    				var responseData = JSON.stringify(data);
+    				responseData = eval('(' + responseData + ')');
+    				if(callBack || callBack!='')
+    				{
+    					if(typeof window[callBack] === 'undefined') alert('Callback function not found.');
+    					else window[callBack].call(this,responseData);
+    				}		
+    			},
+    			error: function(xhr, status, e) {
+    				alert('In failure: ' + e);
+    			}
+    		});
     	} else {
-    		window.open("\loginPage",'_self','',true);
+    		window.open("/loginPage",'_self','',true);
     	}
+    }
+    
+    function callbackLogout(response) {
+    	window.open('/','_self','',true);
     }
     
     function criteriaChange1() {

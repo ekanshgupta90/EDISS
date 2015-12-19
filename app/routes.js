@@ -4,7 +4,7 @@
  * @description All the rest call will be directed to this script.
  */
 
-module.exports = function (app,connection,logger, bodyParser, session) {
+module.exports = function (app,connection,logger, bodyParser, session, writeconn) {
 
 	
 	/**
@@ -248,7 +248,7 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 	app.post('/registerUser', function (request, response) {
 		logger.info("Register User -" + request.body.email);
 		var success = true;
-		connection.getConnection(function(err,conn){
+		writeconn.getConnection(function(err,conn){
 			if(err) {
 				logger.error(err);
 				response.json({'status' : 'f', 'message' : 'there was a problem with your registration'});
@@ -329,7 +329,7 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 			} else {
 				email = request.body.email;
 			}
-			connection.getConnection(function(err,conn){
+			writeconn.getConnection(function(err,conn){
 				if(err) {
 					logger.error(err);
 					response.json({'status' : 'f', 'message' : 'Connection Error!'});
@@ -509,32 +509,58 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 				if (keyword) {
 					query1 = "SELECT * FROM product WHERE title like ? limit 100";
 					par.push('%'+keyword+'%');
+					
+					conn.query(query1,par, function (err, rows, fields) {
+						conn.release();
+						if (!err) {
+							if (rows.length > 0) {
+								var usersArray = new Array();
+								for (var i = 0; i < rows.length; i++) {
+									var product = {
+											id : rows[i].id,
+											title : rows[i].title,
+											asin : rows[i].asin,
+											groups : rows[i].group
+									};
+									usersArray.push(product);
+								}
+							
+								response.json({product_list:usersArray});
+							} else {
+								
+								response.json({product_list:[]});
+							}
+						}
+					});
 				} else if (productId){
+					
 					query1 = "SELECT * FROM product WHERE id = ? limit 100";
 					par.push (productId);
-				} 
-				conn.query(query1,par, function (err, rows, fields) {
-					conn.release();
-					if (!err) {
-						if (rows.length > 0) {
-							var usersArray = new Array();
-							for (var i = 0; i < rows.length; i++) {
-								var product = {
-										id : rows[i].id,
-										title : rows[i].title,
-										asin : rows[i].asin,
-										groups : rows[i].group
-								};
-								usersArray.push(product);
-							}
-						
-							response.json({product_list:usersArray});
-						} else {
+					
+					conn.query(query1,par, function (err, rows, fields) {
+						conn.release();
+						if (!err) {
+							if (rows.length > 0) {
+								var usersArray = new Array();
+								for (var i = 0; i < rows.length; i++) {
+									var product = {
+											id : rows[i].id,
+											title : rows[i].title,
+											asin : rows[i].asin,
+											groups : rows[i].group
+									};
+									usersArray.push(product);
+								}
 							
-							response.json({product_list:[]});
+								response.json({product_list:usersArray});
+							} else {
+								
+								response.json({product_list:[]});
+							}
 						}
-					}
-				});
+					});
+				} 
+				
 			}
 		});
 	});
@@ -549,27 +575,105 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 		}
 	});
 	
+	app.post('/alsoBought', function (request, response) {
+		logger.info ('Also Bought');
+		var sess = request.mySession;
+		
+		if(!sess.username || sess.role !== 'admin') {
+			response.redirect('/');
+		} else {
+			logger.info ('INSIDE');
+			if (request.body.productId1 && request.body.productId2) {
+				writeconn.getConnection(function(err, conn) {
+					if (err) {
+						logger.error(err);
+						response.json({'status' : 'f', 'message' : 'There was a problem with your updation'});
+					} else {
+						conn.query("insert into recommendations values (?,?)",[request.body.productId1,request.body.productId2], function(err,rows,field){
+							conn.release();
+							if (!err) {
+								
+								response.json({'status' : 's', 'message' : 'the request was successful'});
+							} else {
+								
+								logger.debug(err);
+								response.json({'status' : 'f', 'message' : 'there was a problem processing the request'});
+							}
+						});
+					}
+				});
+			} else {
+				logger.debug("AlsoBought - ProductId missing in request!");
+				response.json({'status' : 'f', 'message' : 'there was a problem processing the request'});
+			}	
+		}
+			
+	});
+	
+	app.post('/getRecommendations', function (request, response) {
+		var sess = request.mySession;
+		
+		if(!sess.username) {
+			response.redirect('/');
+		} else {
+			if (request.body.productId) {
+				writeconn.getConnection(function(err, conn) {
+					if (err) {
+						logger.error(err);
+						response.json({'status' : 'f', 'message' : 'There was a problem with your updation'});
+					} else {
+						conn.query("select * from  recommendations where productId1 = ? limit 5",[request.body.productId], function(err,rows,field){
+							conn.release();
+							if (!err) {
+								if (rows.length > 0) {
+									var prods = new Array();
+									for (var i = 0; i < rows.length; i++) {
+										prods.push(rows[i].productId2);
+									}
+									response.json({'status' : 's', 'message' : 'the request was successful', 'relatedProducts:' : prods});
+								} else {
+									response.json({'status' : 's', 'message' : 'the request was successful', 'relatedProducts:' : []});
+								}
+								
+							} else {
+								
+								logger.debug(err);
+								response.json({'status' : 'f', 'message' : 'there was a problem processing the request'});
+							}
+						});
+					}
+				});
+			} else {
+				logger.debug("AlsoBought - ProductId missing in request!");
+				response.json({'status' : 'f', 'message' : 'there was a problem processing the request'});
+			}	
+		}
+			
+	});
+	
 	app.post('/modifyProduct', function (request, response) {
 		var sess = request.mySession;
 		if(!sess.username || sess.role !== 'admin') {
 			response.redirect('/');
 		} else {
-			connection.getConnection(function(err,conn){
-				conn.release();
+			writeconn.getConnection(function(err,conn){
 				if (err) {
 					logger.error(err);
 					response.json({'status' : 'f', 'message' : 'There was a problem with your updation'});
+				} else {
+					conn.query("Update product set title = ? where id = ?",[request.body.title,request.body.id], function(err,rows,field){
+						conn.release();
+						if (!err) {
+							
+							response.json({'status' : 's', 'message' : 'The product has been updated'});
+						} else {
+							
+							logger.debug(err);
+							response.json({'status' : 'f', 'message' : 'There was a problem with your updation'});
+						}
+					});
 				}
-				conn.query("Update product set title = ? where id = ?",[request.body.title,request.body.id], function(err,rows,field){
-					if (!err) {
-						
-						response.json({'status' : 's', 'message' : 'The product has been updated'});
-					} else {
-						
-						logger.debug(err);
-						response.json({'status' : 'f', 'message' : 'There was a problem with your updation'});
-					}
-				});
+				
 			});
 		}
 	});
@@ -584,7 +688,7 @@ module.exports = function (app,connection,logger, bodyParser, session) {
 				logger.error(err);
 				response.json({'status' : 'f', 'message' : 'Need to enter product id.'});
 			}
-			connection.getConnection(function(err,conn) {
+			writeconn.getConnection(function(err,conn) {
 				if (err) {
 					logger.error(err);
 					response.json({'status' : 'f', 'message' : 'There was a problem with connection.'});
